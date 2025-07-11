@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BeerDrivenDevsApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:BeerDrivenDevsApp.Pages"
+    NavBarIsVisible="False"
+    Title="BeerDrivenDevsApp">
+
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate pages:HomePage}"
+            Icon="{FontImageSource FontFamily=Lucide,
+                                   Glyph={x:StaticResource House},
+                                   Size=24}"
+            Route="HomePage" />
+        
+        <ShellContent
+            Title="Player"
+            ContentTemplate="{DataTemplate pages:PlayerPage}"
+            Icon="{FontImageSource FontFamily=Lucide,
+                                   Glyph={x:StaticResource Play},
+                                   Size=24}"
+            Route="PlayerPage" />
+        
+        <ShellContent
+            Title="Community"
+            ContentTemplate="{DataTemplate pages:CommunityPage}"
+            Icon="{FontImageSource FontFamily=Lucide,
+                                   Glyph={x:StaticResource Users},
+                                   Size=24}"
+            Route="CommunityPage" />
+        
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate pages:SettingsPage}"
+            Icon="{FontImageSource FontFamily=Lucide,
+                                   Glyph={x:StaticResource Settings},
+                                   Size=24}"
+            Route="SettingsPage" />
+    </TabBar>
+    
+</Shell>

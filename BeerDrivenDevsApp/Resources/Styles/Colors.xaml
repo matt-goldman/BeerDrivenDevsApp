@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+    
+    <Color x:Key="PrimaryDarkText">#242424</Color>
+    <Color x:Key="SecondaryDarkText">#9880e5</Color>
+    <Color x:Key="Tertiary">#2B0B98</Color>
+
+    <Color x:Key="White">White</Color>
+    <Color x:Key="Black">Black</Color>
+    <Color x:Key="Magenta">#D600AA</Color>
+    <Color x:Key="MidnightBlue">#190649</Color>
+    <Color x:Key="OffBlack">#1f1f1f</Color>
+
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>
+    
+    <Color x:Key="Amber50">#fffbeb</Color>
+    <Color x:Key="Amber200">#fde68a</Color>
+    <Color x:Key="Amber400">#fbbf24</Color>
+    <Color x:Key="Amber600">#d97706</Color>
+    <Color x:Key="Amber700">#b45309</Color>
+    <Color x:Key="Amber900">#78350f</Color>
+    
+    <Color x:Key="Orange50">#fff7ed</Color>
+
+    <Color x:Key="Background">#FFFFFFFF</Color>
+    <Color x:Key="Foreground">#FF090909</Color>
+    <Color x:Key="Card">#FFFFFFFF</Color>
+    <Color x:Key="CardForeground">#FF090909</Color>
+    <Color x:Key="Popover">#FFFFFFFF</Color>
+    <Color x:Key="PopoverForeground">#FF090909</Color>
+    <Color x:Key="Primary">#FF161616</Color>
+    <Color x:Key="PrimaryForeground">#FFF9F9F9</Color>
+    <Color x:Key="Secondary">#FFF5F5F5</Color>
+    <Color x:Key="SecondaryForeground">#FF161616</Color>
+    <Color x:Key="Muted">#FFF5F5F5</Color>
+    <Color x:Key="MutedForeground">#FF737373</Color>
+    <Color x:Key="Accent">#FFF5F5F5</Color>
+    <Color x:Key="AccentForeground">#FF161616</Color>
+    <Color x:Key="Destructive">#FFEE4444</Color>
+    <Color x:Key="DestructiveForeground">#FFF9F9F9</Color>
+    <Color x:Key="Border">#FFE4E4E4</Color>
+    <Color x:Key="Input">#FFE4E4E4</Color>
+    <Color x:Key="Ring">#FF090909</Color>
+    <Color x:Key="Chart1">#FFE7BC4F</Color>
+    <Color x:Key="Chart2">#FF29299D</Color>
+    <Color x:Key="Chart3">#FF26262E</Color>
+    <Color x:Key="Chart4">#FF68E8B2</Color>
+    <Color x:Key="Chart5">#FF99F461</Color>
+    <Color x:Key="SidebarBackground">#FFF9F9F9</Color>
+    <Color x:Key="SidebarForeground">#FF3F3F3F</Color>
+    <Color x:Key="SidebarPrimary">#FF171717</Color>
+    <Color x:Key="SidebarPrimaryForeground">#FFF9F9F9</Color>
+    <Color x:Key="SidebarAccent">#FFF4F4F4</Color>
+    <Color x:Key="SidebarAccentForeground">#FF171717</Color>
+    <Color x:Key="SidebarBorder">#FFE5E5E5</Color>
+    <Color x:Key="SidebarRing">#FF3B3B3B</Color>
+    <Color x:Key="BackgroundDark">#FF090909</Color>
+    <Color x:Key="ForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="CardDark">#FF090909</Color>
+    <Color x:Key="CardForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="PopoverDark">#FF090909</Color>
+    <Color x:Key="PopoverForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="PrimaryDark">#FFF9F9F9</Color>
+    <Color x:Key="PrimaryForegroundDark">#FF161616</Color>
+    <Color x:Key="SecondaryDark">#FF252525</Color>
+    <Color x:Key="SecondaryForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="MutedDark">#FF252525</Color>
+    <Color x:Key="MutedForegroundDark">#FFA2A2A2</Color>
+    <Color x:Key="AccentDark">#FF252525</Color>
+    <Color x:Key="AccentForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="DestructiveDark">#FF7F1D1D</Color>
+    <Color x:Key="DestructiveForegroundDark">#FFF9F9F9</Color>
+    <Color x:Key="BorderDark">#FF252525</Color>
+    <Color x:Key="InputDark">#FF252525</Color>
+    <Color x:Key="RingDark">#FFD3D3D3</Color>
+    <Color x:Key="Chart1Dark">#FF262626</Color>
+    <Color x:Key="Chart2Dark">#FF2D64B7</Color>
+    <Color x:Key="Chart3Dark">#FF55E830</Color>
+    <Color x:Key="Chart4Dark">#FF565656</Color>
+    <Color x:Key="Chart5Dark">#FF363636</Color>
+    <Color x:Key="SidebarBackgroundDark">#FF171717</Color>
+    <Color x:Key="SidebarForegroundDark">#FFF4F4F4</Color>
+    <Color x:Key="SidebarPrimaryDark">#FF1D1D1D</Color>
+    <Color x:Key="SidebarPrimaryForegroundDark">#FFFFFFFF</Color>
+    <Color x:Key="SidebarAccentDark">#FF272727</Color>
+    <Color x:Key="SidebarAccentForegroundDark">#FFF4F4F4</Color>
+    <Color x:Key="SidebarBorderDark">#FF272727</Color>
+    <Color x:Key="SidebarRingDark">#FF3B3B3B</Color>
+    
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    
+    <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="{StaticResource Amber400}" />
+        <GradientStop Offset="1" Color="{StaticResource Amber600}" />
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="PageBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0" Color="{StaticResource Amber50}" />
+        <GradientStop Offset="1" Color="{StaticResource Orange50}" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>

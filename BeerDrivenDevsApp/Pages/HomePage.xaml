@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
+             xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
+             x:DataType="vm:HomeViewModel"
+             x:Class="BeerDrivenDevsApp.Pages.HomePage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid HorizontalOptions="Fill"
+          VerticalOptions="Start"
+          RowDefinitions="2*, 2*, 2*, 12*"
+          Padding="30"
+          x:Name="MainLayout">
+        <Grid>
+            <Ellipse HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     HeightRequest="85"
+                     WidthRequest="85"
+                     Background="{StaticResource BackgroundGradient}" />
+            
+            <Label HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontFamily="Lucide"
+                   TextColor="{StaticResource Amber900}"
+                   FontSize="36"
+                   Text="{x:Static controls:Icons.Beer}"/>
+        </Grid>
+        
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Spacing="5"
+                             Grid.Row="1">
+            <Label FontSize="Title"
+                   TextColor="{StaticResource Amber900}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans-Semibold"
+                   Text="Beer Driven Devs"/>
+            
+            <Label TextColor="{StaticResource Amber700}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans-Semibold"
+                   Text="Casual Chats with Mates"/>
+        </VerticalStackLayout>
+        
+        <Label Margin="0,20,0,0"
+               Text="Latest Episodes"
+               FontSize="Large"
+               FontAttributes="Bold"
+               FontFamily="OpenSans-Semibold"
+               TextColor="{StaticResource Amber900}"
+               Grid.Row="2"/>
+        
+        <CollectionView ItemsSource="{Binding LatestEpisodes}"
+                        Grid.Row="3">
+               <CollectionView.ItemTemplate>
+                      <DataTemplate>
+                             <controls:EpisodeCard />
+                      </DataTemplate>
+               </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
