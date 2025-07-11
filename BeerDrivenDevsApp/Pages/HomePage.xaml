@@ -7,9 +7,9 @@
              x:Class="BeerDrivenDevsApp.Pages.HomePage"
              NavigationPage.HasNavigationBar="False">
     <Grid HorizontalOptions="Fill"
-          VerticalOptions="Start"
+          VerticalOptions="Fill"
           RowDefinitions="2*, 2*, 2*, 12*"
-          Padding="30"
+          Padding="30,30,30,0"
           x:Name="MainLayout">
         <Grid>
             <Ellipse HorizontalOptions="Center"
@@ -53,7 +53,8 @@
                    Text="Casual Chats with Mates"/>
         </VerticalStackLayout>
         
-        <Label Margin="0,20,0,0"
+        <Label VerticalOptions="Center"
+               VerticalTextAlignment="Center"
                Text="Latest Episodes"
                FontSize="Large"
                FontAttributes="Bold"
@@ -64,8 +65,8 @@
         <RefreshView Command="{Binding RefreshCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
                      Grid.Row="3"
-                     VerticalOptions="FillAndExpand"
-                     HorizontalOptions="FillAndExpand">
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill">
                <CollectionView ItemsSource="{Binding LatestEpisodes}">
                       <CollectionView.ItemTemplate>
                              <DataTemplate>

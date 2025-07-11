@@ -5,12 +5,10 @@ public interface IFileDownloadService
     Task DownloadFileAsync(string url, string destinationPath, IProgress<double> progress,
         CancellationToken cancellationToken);
 }
-public class FileDownloadService  : IFileDownloadService
+public class FileDownloadService(HttpClient httpClient)  : IFileDownloadService
 {
     public async Task DownloadFileAsync(string url, string destinationPath, IProgress<double> progress, CancellationToken cancellationToken)
     {
-        using var httpClient = new HttpClient();
-
         using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
 

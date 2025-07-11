@@ -6,26 +6,32 @@ namespace BeerDrivenDevsApp.Services;
 public interface IEpisodeService
 {
     Task<List<Episode>> GetEpisodes();
+
+    Task<List<Episode>> GetLatestEpisodes();
 }
 
-// public class EpisodeService
-// {
-//     
-// }
 
-public class /*Mock*/EpisodeService : IEpisodeService
+public class EpisodeService(HttpClient httpClient, DataService dataService) : IEpisodeService
 {
-    /*
-     * Well, looks like Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../Resources") will do the trick. Who woulda thunk? 😉
-     */
-    private readonly string _testDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../Resources", "test-data.xml");
     
-    public async Task<List<Episode>> GetEpisodes()
+    public Task<List<Episode>> GetEpisodes()
     {
-        await using var stream = await FileSystem.OpenAppPackageFileAsync("test-data.xml");
-        using var reader = new StreamReader(stream);
+        return dataService.GetEpisodes();
+    }
+
+    public async Task<List<Episode>> GetLatestEpisodes()
+    {
+        var rssFeed = await httpClient.GetStreamAsync("/episodes/index.xml");
+        using var reader = new StreamReader(rssFeed);
         var testData = await reader.ReadToEndAsync();
 
-        return BddFeedDeserializer.DeserializeFeed(testData);
+        var episodes = BddFeedDeserializer.DeserializeFeed(testData);
+
+        if (episodes != null && episodes.Count != 0)
+        {
+            await dataService.AddMissingEpisodes(episodes);
+        }
+
+        return await dataService.GetLatestEpisodes(6);
     }
 }

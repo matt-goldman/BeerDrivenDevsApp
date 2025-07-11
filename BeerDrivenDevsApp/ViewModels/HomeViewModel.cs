@@ -13,24 +13,20 @@ public partial class HomeViewModel(IEpisodeService episodes, IFileDownloadServic
 
     public ObservableCollection<Episode> LatestEpisodes { get; set; } = [];
     
-    public async Task Init()
+    public Task Init() => Refresh();
+
+    [RelayCommand]
+    private async Task Refresh()
     {
         IsRefreshing = true;
         await LoadLatestEpisodes();
         IsRefreshing = false;
     }
-    
-    [RelayCommand]
-    private Task Refresh() => LoadLatestEpisodes();
 
     private async Task LoadLatestEpisodes()
     {
-        var latestEpisodes = await episodes.GetEpisodes();
+        var latestEpisodes = await episodes.GetLatestEpisodes();
         LatestEpisodes.Clear();
-        foreach (var episode in latestEpisodes
-                     .Take(6))
-        {
-            LatestEpisodes.Add(episode);
-        }
+        latestEpisodes.ForEach(e => LatestEpisodes.Add(e));
     }
 }
