@@ -61,13 +61,18 @@
                TextColor="{StaticResource Amber900}"
                Grid.Row="2"/>
         
-        <CollectionView ItemsSource="{Binding LatestEpisodes}"
-                        Grid.Row="3">
-               <CollectionView.ItemTemplate>
-                      <DataTemplate>
-                             <controls:EpisodeCard />
-                      </DataTemplate>
-               </CollectionView.ItemTemplate>
-        </CollectionView>
+        <RefreshView Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Grid.Row="3"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand">
+               <CollectionView ItemsSource="{Binding LatestEpisodes}">
+                      <CollectionView.ItemTemplate>
+                             <DataTemplate>
+                                    <controls:EpisodeCard />
+                             </DataTemplate>
+                      </CollectionView.ItemTemplate>
+               </CollectionView>
+        </RefreshView>
     </Grid>
 </ContentPage>

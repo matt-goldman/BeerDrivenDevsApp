@@ -17,6 +17,8 @@ public class Episode
     public string AudioUrl { get; set; } = string.Empty;
 
     public bool IsDownloaded { get; set; } = false;
+    
+    public double DownloadProgress { get; set; } = 0.0;
 
     public string Duration { get; set; } =  string.Empty;
 }

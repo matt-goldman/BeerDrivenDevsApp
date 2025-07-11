@@ -63,6 +63,7 @@
         <PackageReference Include="CommunityToolkit.Maui" Version="12.1.0" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
         <PackageReference Include="Goldie.MauiPlugins.PageResolver" Version="2.5.4" />
+        <PackageReference Include="LiteDB.Async" Version="0.1.8" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.81" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-rc.2.24473.5"/>
     </ItemGroup>
