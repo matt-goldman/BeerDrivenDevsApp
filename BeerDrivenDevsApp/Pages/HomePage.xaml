@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="vm:HomeViewModel"
+             x:Name="HomePageRef"
              x:Class="BeerDrivenDevsApp.Pages.HomePage"
              NavigationPage.HasNavigationBar="False">
     <Grid HorizontalOptions="Fill"
@@ -24,7 +25,7 @@
                        HorizontalTextAlignment="Start"
                        VerticalTextAlignment="Center"
                        FontAttributes="Bold"
-                       FontFamily="OpenSans-Semibold"
+                       FontFamily="ArialBold"
                        Text="Beer Driven Devs"/>
 
                 <Label TextColor="{StaticResource Amber700}"
@@ -34,7 +35,7 @@
                        VerticalTextAlignment="Center"
                        FontSize="Medium"
                        FontAttributes="Bold"
-                       FontFamily="OpenSans-Semibold"
+                       FontFamily="ArialBold"
                        Text="Casual Chats with Mates"/>
             </VerticalStackLayout>
             <Grid>
@@ -61,7 +62,7 @@
                Text="Latest Episodes"
                FontSize="Large"
                FontAttributes="Bold"
-               FontFamily="OpenSans-Semibold"
+               FontFamily="ArialBold"
                TextColor="{StaticResource Amber900}"
                Grid.Row="1"/>
         
@@ -72,16 +73,10 @@
                      HorizontalOptions="Fill">
                <CollectionView ItemsSource="{Binding LatestEpisodes}">
                       <CollectionView.ItemTemplate>
-                             <DataTemplate>
-                        <controls:EpisodeCard>
-                            <controls:EpisodeCard.Behaviors>
-                                <toolkit:EventToCommandBehavior Command="{Binding DownloadEpisodeCommand}"
-                                                                CommandParameter="{Binding}"
-                                                                EventName="DownloadButtonClicked"/>
-                            </controls:EpisodeCard.Behaviors>
-                        </controls:EpisodeCard>
+                          <DataTemplate>
+                        <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"/>
                     </DataTemplate>
-                      </CollectionView.ItemTemplate>
+                </CollectionView.ItemTemplate>
                </CollectionView>
         </RefreshView>
     </Grid>

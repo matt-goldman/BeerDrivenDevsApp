@@ -1,16 +1,21 @@
+using System.Windows.Input;
+
 namespace BeerDrivenDevsApp.Controls;
 
 public partial class EpisodeCard : ContentView
 {
-    public event EventHandler? DownloadButtonClicked;
-
     public EpisodeCard()
     {
         InitializeComponent();
     }
 
-    public void OnDownloadButtonClicked(object sender, EventArgs e)
+    public static readonly BindableProperty DownloadCommandProperty =
+    BindableProperty.Create(nameof(DownloadCommand), typeof(ICommand), typeof(EpisodeCard));
+
+    public ICommand DownloadCommand
     {
-        DownloadButtonClicked?.Invoke(this, EventArgs.Empty);
+        get => (ICommand)GetValue(DownloadCommandProperty);
+        set => SetValue(DownloadCommandProperty, value);
     }
+
 }

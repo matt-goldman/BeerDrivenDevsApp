@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
              xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="EpisodeCardRoot"
              x:Class="BeerDrivenDevsApp.Controls.EpisodeCard">
     <ContentView.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
@@ -17,7 +18,7 @@
             Padding="0"
             BackgroundColor="{StaticResource Card}"
             x:DataType="vm:EpisodeViewModel">
-        <Grid RowDefinitions="6*, 4*"
+        <Grid RowDefinitions="9*, 7*"
               VerticalOptions="Fill"
               HorizontalOptions="Fill"
               MaximumHeightRequest="300"
@@ -57,23 +58,23 @@
                             AlignItems="Start"
                             JustifyContent="SpaceEvenly"
                             Margin="10">
-                    <VerticalStackLayout Spacing="5">
+                    <VerticalStackLayout Spacing="2">
                            <Label FontAttributes="Bold"
-                                  FontFamily="OpenSans-Semibold"
+                                  FontFamily="ArialBold"
                                   Text="{Binding Title}"
                                   TextColor="{StaticResource Amber900}"
                                   LineBreakMode="TailTruncation"
                                   MaxLines="2"
-                                  LineHeight="0.75"
-                                  FontSize="16"
+                                  LineHeight="1"
+                                  FontSize="Medium"
                                   VerticalOptions="Start"
                                   HorizontalOptions="Start" />
 
                            <Label Text="{Binding Summary}"
                                   TextColor="{StaticResource Amber700}"
-                                  FontSize="12"
+                                  FontSize="Small"
                                   LineBreakMode="TailTruncation"
-                                  LineHeight="0.75"
+                                  LineHeight="1"
                                   VerticalOptions="Start"
                                   HorizontalOptions="Start"
                                   MaxLines="2" />
@@ -110,7 +111,8 @@
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
                                  IsEnabled="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"
-                                 Clicked="OnDownloadButtonClicked"
+                                 Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=DownloadCommand}"
+                                 CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Size=12,
                                                           Glyph={x:Static controls:Icons.Download},
