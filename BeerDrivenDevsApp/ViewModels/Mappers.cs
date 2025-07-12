@@ -16,8 +16,7 @@ public static class Mappers
             ReleasedOn          = episode.ReleasedOn,
             AudioUrl            = episode.AudioUrl,
             IsDownloaded        = episode.IsDownloaded,
-            ThumbnailUrl        = episode.ThumbnailUrl,
-            DownloadProgress    = episode.DownloadProgress
+            ThumbnailUrl        = episode.ThumbnailUrl
         };
     }
 
@@ -33,8 +32,7 @@ public static class Mappers
             ReleasedOn          = viewModel.ReleasedOn,
             AudioUrl            = viewModel.AudioUrl,
             IsDownloaded        = viewModel.IsDownloaded,
-            ThumbnailUrl        = viewModel.ThumbnailUrl,
-            DownloadProgress    = viewModel.DownloadProgress
+            ThumbnailUrl        = viewModel.ThumbnailUrl
         };
     }
 }

@@ -79,44 +79,5 @@
                 </CollectionView.ItemTemplate>
                </CollectionView>
         </RefreshView>
-
-        <Grid IsVisible="{Binding DownloadInProgress}"
-              VerticalOptions="Fill"
-              HorizontalOptions="Fill"
-              Grid.RowSpan="3">
-            <BoxView HorizontalOptions="Fill"
-                     VerticalOptions="Fill"
-                     BackgroundColor="{StaticResource Gray100}"
-                     Opacity="0.8"/>
-
-            <Border Style="{StaticResource CardBorder}"
-                   Margin="20"
-                   Padding="20"
-                   BackgroundColor="{StaticResource Card}"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center">
-                <FlexLayout HeightRequest="200"
-                            WidthRequest="200"
-                            VerticalOptions="Fill"
-                            Direction="Column"
-                            AlignContent="Center"
-                            AlignItems="Center"
-                            JustifyContent="SpaceEvenly">
-                    <ActivityIndicator Color="{StaticResource Amber600}"
-                                       IsEnabled="True"
-                                       IsRunning="True"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center"
-                                       WidthRequest="50" />
-                    <Label Text="Downloading Episode..." 
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           TextColor="{StaticResource Amber900}"
-                           FontSize="Medium"
-                           FontAttributes="Bold"
-                           FontFamily="ArialBold"/>
-                </FlexLayout>
-            </Border>
-        </Grid>
     </Grid>
 </ContentPage>

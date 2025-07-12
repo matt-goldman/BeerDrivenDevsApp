@@ -10,9 +10,6 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     [ObservableProperty]
     private bool _isRefreshing = false;
 
-    [ObservableProperty]
-    private bool _downloadInProgress = false;
-
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
     
     public Task Init() =>
@@ -42,9 +39,7 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
         if (episode.IsDownloaded)
             return;
         
-        DownloadInProgress = true;
-        await episodes.DownloadEpisode(episode.EpisodeNumber);
-        DownloadInProgress = false;
+        await episodes.DownloadEpisode(episode.EpisodeNumber, episode.DownloadProgress);
         episode.IsDownloaded = true;
     }
 }

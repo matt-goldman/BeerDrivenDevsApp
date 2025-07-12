@@ -11,7 +11,7 @@ public interface IEpisodeService
 
     Task UpdateEpisode(EpisodeViewModel episode);
 
-    Task DownloadEpisode(int episode);
+    Task DownloadEpisode(int episode, double progress);
 }
 
 public class EpisodeService(
@@ -21,7 +21,7 @@ public class EpisodeService(
 {
     private static readonly string EpisodeDirectory = Path.Combine(FileSystem.AppDataDirectory, "bdd_episodes");
 
-    public async Task DownloadEpisode(int episodeNumber)
+    public async Task DownloadEpisode(int episodeNumber, double downloadProgress)
     {
         var episode = await dataService.GetEpisode(episodeNumber);
         
@@ -59,11 +59,10 @@ public class EpisodeService(
 
         episode.AudioFilePath = Path.Combine(EpisodeDirectory, fileName);
 
-        var progress = new Progress<double>(p => episode.DownloadProgress = p);
+        var progress = new Progress<double>(p => downloadProgress = p);
 
         await downloads.DownloadFileAsync(downloadUrl, episode.AudioFilePath, progress, CancellationToken.None);
         episode.IsDownloaded = true;
-        episode.DownloadProgress = 1.0; // Set to 100% after download completes
         await dataService.UpsertEpisode(episode);
     }
 
