@@ -40,10 +40,8 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
         if (episode.IsDownloaded)
             return;
 
-        // IsDownloading cannot be set directly as it is a computed property
-        // Instead, we set DownloadProgress to a non-zero value
-        episode.DownloadProgress = 0.5;
-        await episodes.DownloadEpisode(episode.EpisodeNumber, episode.DownloadProgress);
+        var progress = new Progress<double>(value => episode.DownloadProgress = value);
+        await episodes.DownloadEpisode(episode.EpisodeNumber, progress);
         episode.IsDownloaded = true;
     }
 }
