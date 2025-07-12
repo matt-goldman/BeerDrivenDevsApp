@@ -39,22 +39,21 @@
                          VerticalOptions="Fill"
                          IsVisible="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"/>
 
+                <controls:DownloadProgress HorizontalOptions="Fill"
+                                           VerticalOptions="Fill"
+                                           Progress="{Binding DownloadProgress}"
+                                           x:Name="DownloadProgressView" />
+
                 <Label HorizontalOptions="Center"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
-                       FontFamily="Lucide"
-                       TextColor="{StaticResource Amber900}"
+                       FontAttributes="Bold"
+                       FontFamily="ArialBold"
+                       TextColor="{StaticResource Amber600}"
                        FontSize="36"
                        IsVisible="{Binding IsDownloading}"
                        Text="{Binding DownloadProgress, StringFormat='{0:P0}'}"/>
-
-                <BoxView HorizontalOptions="Start"
-                         VerticalOptions="End"
-                         IsVisible="{Binding IsDownloading}"
-                         WidthRequest="{Binding DownloadProgress, Converter={StaticResource ProgressToWidth}}"
-                         HeightRequest="4"
-                         BackgroundColor="{StaticResource Amber900}" />
             </Grid>
 
             <Grid ColumnDefinitions="8*,*"

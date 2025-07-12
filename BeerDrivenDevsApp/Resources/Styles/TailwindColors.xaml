@@ -13,6 +13,7 @@
   <Color x:Key="Amber200">#FEE685</Color>
   <Color x:Key="Amber300">#FFD230</Color>
   <Color x:Key="Amber400">#FFB900</Color>
+  <Color x:Key="Amber400pc15">#99FFBB00</Color>
   <Color x:Key="Amber50">#FFFBEB</Color>
   <Color x:Key="Amber500">#FE9A00</Color>
   <Color x:Key="Amber600">#E17100</Color>
@@ -234,6 +235,7 @@
   <Color x:Key="Yellow100">#FEF9C2</Color>
   <Color x:Key="Yellow200">#FFF085</Color>
   <Color x:Key="Yellow300">#FFDF20</Color>
+  <Color x:Key="Yellow300pc15">#99FFDF20</Color>
   <Color x:Key="Yellow400">#FDC700</Color>
   <Color x:Key="Yellow50">#FEFCE8</Color>
   <Color x:Key="Yellow500">#F0B100</Color>

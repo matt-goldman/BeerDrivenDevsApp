@@ -1,6 +1,7 @@
 ﻿using BeerDrivenDevsApp.Services;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace BeerDrivenDevsApp;
 
@@ -18,6 +19,7 @@ public static class MauiProgram
                 fonts.AddFont("ArialBold.ttf", "OpenSansSemibold");
                 fonts.AddFont("lucide.ttf", "Lucide");
             })
+            .UseSkiaSharp()
             .UseAutodependencies();
 
         builder.Services.AddHttpClient<IFileDownloadService, FileDownloadService>();

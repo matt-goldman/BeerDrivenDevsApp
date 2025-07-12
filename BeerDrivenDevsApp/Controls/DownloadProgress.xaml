@@ -2,6 +2,20 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
+             xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="BeerDrivenDevsApp.Controls.DownloadProgress">
-    
+    <Grid x:DataType="vm:EpisodeViewModel">
+        <controls:BeerProgressOverlayView Progress="{Binding DownloadProgress}"
+                                          HorizontalOptions="Fill"
+                                          VerticalOptions="Fill"
+                                          AnimationCompleted="BeerProgressOverlayView_AnimationCompleted"
+                                          x:Name="BeerOverlay" />
+
+        <skia:SKConfettiView HorizontalOptions="Fill"
+                             VerticalOptions="End"
+                             IsAnimationEnabled="{Binding IsDownloading}"
+                             x:Name="Confetti" />
+    </Grid>
 </ContentView>
