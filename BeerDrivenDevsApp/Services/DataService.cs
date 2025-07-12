@@ -28,7 +28,7 @@ public class DataService
     public async Task<Episode?> GetEpisode(int episodeNumber)
     {
         var collection = _db.GetCollection<Episode>();
-        var result = await collection.FindOneAsync(x => x.EpisodeNumber == episodeNumber);
+        var result = await collection.FindOneAsync(x => x.EpisodeId == episodeNumber);
         return result;
     }
 
@@ -36,7 +36,7 @@ public class DataService
     {
         var collection = _db.GetCollection<Episode>();
 
-        bool episodeExists = await collection.ExistsAsync(x => x.EpisodeNumber == episode.EpisodeNumber);
+        bool episodeExists = await collection.ExistsAsync(x => x.EpisodeId == episode.EpisodeId);
 
         if (episodeExists)
         {
@@ -53,9 +53,9 @@ public class DataService
     {
         var collection = _db.GetCollection<Episode>();
 
-        var dbEpisodeNumbers = await collection.Query().Select(x => x.EpisodeNumber).ToListAsync();
+        var dbEpisodeNumbers = await collection.Query().Select(x => x.EpisodeId).ToListAsync();
 
-        var newEpisodes = episodes.Where(e => !dbEpisodeNumbers.Contains(e.EpisodeNumber)).ToList();
+        var newEpisodes = episodes.Where(e => !dbEpisodeNumbers.Contains(e.EpisodeId)).ToList();
 
         if (newEpisodes.Count != 0)
         {
@@ -66,6 +66,6 @@ public class DataService
     public Task<List<Episode>> GetLatestEpisodes(int count)
     {
         var collection = _db.GetCollection<Episode>();
-        return collection.Query().OrderByDescending(x => x.EpisodeNumber).Limit(count).ToListAsync();
+        return collection.Query().OrderByDescending(x => x.EpisodeId).Limit(count).ToListAsync();
     }
 }

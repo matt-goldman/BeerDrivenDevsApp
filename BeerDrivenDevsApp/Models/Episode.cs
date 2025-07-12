@@ -2,7 +2,7 @@ namespace BeerDrivenDevsApp.Models;
 
 public class Episode
 {
-    public int EpisodeNumber { get; set; }
+    public int EpisodeId { get; set; }
     
     public DateTime ReleasedOn { get; set; }
     

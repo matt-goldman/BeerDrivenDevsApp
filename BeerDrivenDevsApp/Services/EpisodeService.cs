@@ -19,6 +19,8 @@ public class EpisodeService(
     DataService dataService,
     IFileDownloadService downloads) : IEpisodeService
 {
+    private static readonly string EpisodeDirectory = Path.Combine(FileSystem.AppDataDirectory, "bdd_episodes");
+
     public async Task DownloadEpisode(int episodeNumber)
     {
         var episode = await dataService.GetEpisode(episodeNumber);
@@ -49,12 +51,17 @@ public class EpisodeService(
         // replace spaces and special characters in the filename
         fileName = fileName.Replace(" ", "_").Replace("%20", "_").Replace("'", "").Replace("\"", "").Replace("?", "").Replace("&", "").Replace("=", "");
 
-        episode.AudioFilePath = Path.Combine("bdd_episodes", fileName);
+        // Ensure the episode directory exists
+        if (!Directory.Exists(EpisodeDirectory))
+        {
+            Directory.CreateDirectory(EpisodeDirectory);
+        }
 
-        var destinationPath = Path.Combine(FileSystem.AppDataDirectory, episode.AudioFilePath);
+        episode.AudioFilePath = Path.Combine(EpisodeDirectory, fileName);
+
         var progress = new Progress<double>(p => episode.DownloadProgress = p);
 
-        await downloads.DownloadFileAsync(downloadUrl, destinationPath, progress, CancellationToken.None);
+        await downloads.DownloadFileAsync(downloadUrl, episode.AudioFilePath, progress, CancellationToken.None);
         episode.IsDownloaded = true;
         episode.DownloadProgress = 1.0; // Set to 100% after download completes
         await dataService.UpsertEpisode(episode);

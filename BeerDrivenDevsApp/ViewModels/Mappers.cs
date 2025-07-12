@@ -8,7 +8,7 @@ public static class Mappers
     {
         return new EpisodeViewModel
         {
-            EpisodeNumber       = episode.EpisodeNumber,
+            EpisodeNumber       = episode.EpisodeId,
             Title               = episode.Title,
             Description         = episode.Notes,
             Summary             = episode.Summary,
@@ -25,7 +25,7 @@ public static class Mappers
     {
         return new Episode
         {
-            EpisodeNumber       = viewModel.EpisodeNumber,
+            EpisodeId       = viewModel.EpisodeNumber,
             Title               = viewModel.Title,
             Notes               = viewModel.Description,
             Summary             = viewModel.Summary,
