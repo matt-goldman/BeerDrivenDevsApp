@@ -25,17 +25,28 @@ public class DataService
         return results.ToList();
     }
 
-    public async Task<Episode?> GetEpisode(string episodeNumber)
+    public async Task<Episode?> GetEpisode(int episodeNumber)
     {
         var collection = _db.GetCollection<Episode>();
         var result = await collection.FindOneAsync(x => x.EpisodeNumber == episodeNumber);
         return result;
     }
 
-    public async Task AddEpisode(Episode episode)
+    public async Task UpsertEpisode(Episode episode)
     {
         var collection = _db.GetCollection<Episode>();
-        await collection.InsertAsync(episode);
+
+        bool episodeExists = await collection.ExistsAsync(x => x.EpisodeNumber == episode.EpisodeNumber);
+
+        if (episodeExists)
+        {
+            await collection.UpdateAsync(episode);
+        }
+        else
+        {
+            await collection.InsertAsync(episode);
+        }
+
     }
 
     public async Task AddMissingEpisodes(IEnumerable<Episode> episodes)
@@ -55,6 +66,6 @@ public class DataService
     public Task<List<Episode>> GetLatestEpisodes(int count)
     {
         var collection = _db.GetCollection<Episode>();
-        return collection.Query().OrderByDescending(x => x.ReleasedOn).Limit(count).ToListAsync();
+        return collection.Query().OrderByDescending(x => x.EpisodeNumber).Limit(count).ToListAsync();
     }
 }

@@ -34,7 +34,7 @@ public static class BddFeedDeserializer
                 Notes           = item.Encoded,
                 ThumbnailUrl    = item.Image,
                 Duration        = item.Duration,
-                EpisodeNumber   = item.EpisodeNumber,
+                EpisodeNumber   = int.TryParse(item.EpisodeNumber, out var result) ? result : 0,
                 IsDownloaded    = false
             }));
         }

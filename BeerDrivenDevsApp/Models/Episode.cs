@@ -2,7 +2,7 @@ namespace BeerDrivenDevsApp.Models;
 
 public class Episode
 {
-    public string EpisodeNumber { get; set; } = string.Empty;
+    public int EpisodeNumber { get; set; }
     
     public DateTime ReleasedOn { get; set; }
     
@@ -21,4 +21,6 @@ public class Episode
     public double DownloadProgress { get; set; } = 0.0;
 
     public string Duration { get; set; } =  string.Empty;
+
+    public string? AudioFilePath { get; set; } = null;
 }

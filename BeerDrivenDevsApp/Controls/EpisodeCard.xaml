@@ -2,29 +2,50 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:BeerDrivenDevsApp.Models"
+             xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
              xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="BeerDrivenDevsApp.Controls.EpisodeCard">
     <ContentView.Resources>
         <toolkit:InvertedBoolConverter x:Key="InvertedBool" />
+        <toolkit:BoolToObjectConverter x:Key="IsDownloadedConverter"
+                                       TrueObject="{StaticResource Green600}"
+                                       FalseObject="{StaticResource Amber700}" />
     </ContentView.Resources>
     <Border Style="{StaticResource CardBorder}"
             Margin="0,10"
             Padding="0"
             BackgroundColor="{StaticResource Card}"
-            x:DataType="models:Episode">
+            x:DataType="vm:EpisodeViewModel">
         <Grid RowDefinitions="6*, 4*"
               VerticalOptions="Fill"
               HorizontalOptions="Fill"
               MaximumHeightRequest="300"
               Margin="0"
               Padding="0">
-            <Image Source="{Binding ThumbnailUrl}"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="Fill"
-                   Aspect="AspectFill"
-                   Margin="0" />
+            <Grid>
+                <Image Source="{Binding ThumbnailUrl}"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"
+                       Aspect="AspectFill"
+                       Margin="0" />
+
+                <BoxView BackgroundColor="{StaticResource Gray100}"
+                         Opacity="0.5"
+                         HorizontalOptions="Fill"
+                         VerticalOptions="Fill"
+                         IsVisible="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"/>
+
+                <Label HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontFamily="Lucide"
+                       TextColor="{StaticResource Amber900}"
+                       FontSize="36"
+                       IsVisible="{Binding IsDownloading}"
+                       Text="{Binding DownloadProgress, StringFormat='{0:P0}'}"/>
+            </Grid>
 
             <Grid ColumnDefinitions="8*,*"
                   Grid.Row="1"
@@ -36,7 +57,7 @@
                             AlignItems="Start"
                             JustifyContent="SpaceEvenly"
                             Margin="10">
-                    <VerticalStackLayout>
+                    <VerticalStackLayout Spacing="5">
                            <Label FontAttributes="Bold"
                                   FontFamily="OpenSans-Semibold"
                                   Text="{Binding Title}"
@@ -44,13 +65,13 @@
                                   LineBreakMode="TailTruncation"
                                   MaxLines="2"
                                   LineHeight="0.75"
-                                  FontSize="Medium"
+                                  FontSize="16"
                                   VerticalOptions="Start"
                                   HorizontalOptions="Start" />
 
                            <Label Text="{Binding Summary}"
                                   TextColor="{StaticResource Amber700}"
-                                  FontSize="Small"
+                                  FontSize="12"
                                   LineBreakMode="TailTruncation"
                                   LineHeight="0.75"
                                   VerticalOptions="Start"
@@ -84,22 +105,31 @@
                 <FlexLayout Direction="Column"
                             AlignItems="Start"
                             JustifyContent="SpaceEvenly"
-                            HorizontalOptions="Center"
+                            HorizontalOptions="Start"
                             Grid.Column="1">
-                    <Label HorizontalOptions="Center"
-                           FontFamily="Lucide"
-                           Text="{x:Static controls:Icons.Download}"
-                           TextColor="{StaticResource Amber700}" />
+                    <ImageButton HorizontalOptions="Center"
+                                 MaximumWidthRequest="20"
+                                 IsEnabled="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"
+                                 Clicked="OnDownloadButtonClicked"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Size=12,
+                                                          Glyph={x:Static controls:Icons.Download},
+                                                          Color={Binding IsDownloaded, Converter={StaticResource IsDownloadedConverter}}}"/>
 
-                    <Label HorizontalOptions="Center"
-                           FontFamily="Lucide"
-                           Text="{x:Static controls:Icons.Share2}"
-                           TextColor="{StaticResource Amber700}" />
+                    <ImageButton HorizontalOptions="Center"
+                                 MaximumWidthRequest="20"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Size=12,
+                                                          Glyph={x:Static controls:Icons.Share2},
+                                                          Color={StaticResource Amber700}}"/>           
 
-                    <Label HorizontalOptions="Center"
-                           FontFamily="Lucide"
-                           Text="{x:Static controls:Icons.Trash}"
-                           TextColor="{StaticResource Amber700}" />
+                    <ImageButton HorizontalOptions="Center"
+                                 IsVisible="{Binding IsDownloaded}"
+                                 MaximumWidthRequest="20"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Size=12,
+                                                          Glyph={x:Static controls:Icons.Trash},
+                                                          Color={StaticResource Amber700}}"/>
                 </FlexLayout>
             </Grid>
         </Grid>
