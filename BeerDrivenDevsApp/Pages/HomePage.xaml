@@ -14,7 +14,7 @@
           Padding="30,30,30,0"
           x:Name="MainLayout">
         <FlexLayout Direction="Row"
-                    JustifyContent="SpaceAround">
+                    JustifyContent="SpaceBetween">
             <VerticalStackLayout HorizontalOptions="Center"
                      VerticalOptions="Center"
                      Spacing="5">

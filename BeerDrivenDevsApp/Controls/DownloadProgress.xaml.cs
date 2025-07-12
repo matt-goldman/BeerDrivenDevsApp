@@ -43,20 +43,22 @@ public partial class DownloadProgress : ContentView
         _foamConfettiSystem = new SKConfettiSystem
         {
             EmitterBounds   = SKConfettiEmitterBounds.Bottom,
-            Emitter         = SKConfettiEmitter.Infinite(200, -1),
+            Emitter         = SKConfettiEmitter.Infinite(700, -1),
             Shapes          = [new SKConfettiCircleShape()],
-            Colors          = [new Color(255, 255, 255, 180)],
-            Lifetime        = 2,
+            Colors          = [new Color(255, 255, 255, 200)],
+            Lifetime        = 4,
             Physics         = [
                 new SKConfettiPhysics(10, 50),
                 new SKConfettiPhysics(5, 10),
                 new SKConfettiPhysics(2, 20),
                 new SKConfettiPhysics(30, 50),
                 new SKConfettiPhysics(50, 10),
-                new SKConfettiPhysics(20, 20)]
+                new SKConfettiPhysics(20, 20),
+                new SKConfettiPhysics(100, 20)]
         };
 
         Confetti.Systems = [_regularBubbleConfettiSystem];
+        Foam.Systems = [_foamConfettiSystem];
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -78,17 +80,12 @@ public partial class DownloadProgress : ContentView
     {
         if (Progress >= 1.0)
         {
-            Confetti.Systems = [_foamConfettiSystem];
-            _foamConfettiSystem.IsAnimationEnabled = true;
-            Confetti.IsAnimationEnabled = true;
-            await Task.Delay(500); // allow some foam to be visible
-            Confetti.FadeTo(0, 500, Easing.CubicInOut);
-            BeerOverlay.FadeTo(0, 500, Easing.CubicInOut);
-
-        }
-        else
-        {
-            Confetti.Systems = [_regularBubbleConfettiSystem];
+            Foam.IsVisible = true;
+            Foam.IsAnimationEnabled = true;
+            await Task.Delay(2000); // allow some foam to be visible
+            await BeerOverlay.FadeTo(0, 500, Easing.CubicInOut);
+            Confetti.IsVisible = false;
+            Foam.FadeTo(0, 500, Easing.CubicInOut);
         }
     }
 }

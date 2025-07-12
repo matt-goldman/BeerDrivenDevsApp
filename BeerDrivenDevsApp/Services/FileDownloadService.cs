@@ -14,7 +14,7 @@ public class FileDownloadService(HttpClient httpClient)  : IFileDownloadService
 
         var totalBytes = response.Content.Headers.ContentLength ?? -1L;
         var totalRead = 0L;
-        var buffer = new byte[65536]; // 64 KB buffer size, could set higher but keeping this balance better supports concurrent downloads
+        var buffer = new byte[256 * 1024]; // 256 KB buffer
         var isMoreToRead = true;
 
         using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);

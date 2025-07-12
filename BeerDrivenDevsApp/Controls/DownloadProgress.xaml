@@ -17,5 +17,11 @@
                              VerticalOptions="End"
                              IsAnimationEnabled="{Binding IsDownloading}"
                              x:Name="Confetti" />
+
+        <skia:SKConfettiView HorizontalOptions="Fill"
+                             VerticalOptions="Fill"
+                             IsAnimationEnabled="False"
+                             IsVisible="False"
+                             x:Name="Foam" />
     </Grid>
 </ContentView>
