@@ -37,7 +37,7 @@
                          VerticalOptions="Fill"
                          IsVisible="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"/>
 
-                <Label HorizontalOptions="Center"
+                <!--<Label HorizontalOptions="Center"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
@@ -45,7 +45,14 @@
                        TextColor="{StaticResource Amber900}"
                        FontSize="36"
                        IsVisible="{Binding IsDownloading}"
-                       Text="{Binding DownloadProgress, StringFormat='{0:P0}'}"/>
+                       Text="{Binding DownloadProgress, StringFormat='{0:P0}'}"/>-->
+
+                <ActivityIndicator HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Color="{StaticResource Amber900}"
+                                   WidthRequest="50"
+                                   IsRunning="True"
+                                   IsVisible="{Binding IsDownloading}"/>
             </Grid>
 
             <Grid ColumnDefinitions="8*,*"
@@ -111,6 +118,7 @@
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
                                  IsEnabled="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"
+                                 IsVisible="{Binding IsDownloading, Converter={StaticResource InvertedBool}}"
                                  Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=DownloadCommand}"
                                  CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
@@ -120,10 +128,18 @@
 
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
+                                 IsVisible="{Binding IsDownloading}"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Size=12,
+                                                          Glyph={x:Static controls:Icons.CircleX},
+                                                          Color={StaticResource Rose400}}"/>
+
+                    <ImageButton HorizontalOptions="Center"
+                                 MaximumWidthRequest="20"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Size=12,
                                                           Glyph={x:Static controls:Icons.Share2},
-                                                          Color={StaticResource Amber700}}"/>           
+                                                          Color={StaticResource Amber700}}"/>
 
                     <ImageButton HorizontalOptions="Center"
                                  IsVisible="{Binding IsDownloaded}"

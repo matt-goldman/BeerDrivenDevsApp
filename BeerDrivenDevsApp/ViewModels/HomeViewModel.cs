@@ -33,12 +33,16 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
         IsRefreshing = false;
     }
 
-    [RelayCommand]
+    // Need to set allow concurrent executions to true to allow multiple downloads at the same time
+    [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task DownloadEpisode(EpisodeViewModel episode)
     {
         if (episode.IsDownloaded)
             return;
-        
+
+        // IsDownloading cannot be set directly as it is a computed property
+        // Instead, we set DownloadProgress to a non-zero value
+        episode.DownloadProgress = 0.5;
         await episodes.DownloadEpisode(episode.EpisodeNumber, episode.DownloadProgress);
         episode.IsDownloaded = true;
     }
