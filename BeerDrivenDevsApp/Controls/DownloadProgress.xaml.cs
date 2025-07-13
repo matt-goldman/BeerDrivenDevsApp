@@ -42,7 +42,7 @@ public partial class DownloadProgress : ContentView
 
         _foamConfettiSystem = new SKConfettiSystem
         {
-            EmitterBounds   = SKConfettiEmitterBounds.Bottom,
+            EmitterBounds   = SKConfettiEmitterBounds.Top,
             Emitter         = SKConfettiEmitter.Infinite(800, -1),
             Shapes          = [new SKConfettiCircleShape()],
             Colors          = [new Color(255, 255, 255, 200)],
