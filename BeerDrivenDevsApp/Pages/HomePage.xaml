@@ -13,7 +13,7 @@
           RowDefinitions="2*, *, 12*"
           Padding="30,30,30,0"
           x:Name="MainLayout">
-        <FlexLayout Direction="Row"
+        <!--<FlexLayout Direction="Row"
                     JustifyContent="SpaceBetween">
             <VerticalStackLayout HorizontalOptions="Center"
                      VerticalOptions="Center"
@@ -54,7 +54,7 @@
                        FontSize="36"
                        Text="{x:Static controls:Icons.Beer}"/>
             </Grid>
-        </FlexLayout>
+        </FlexLayout>-->
         
         
         <Label VerticalOptions="Center"
