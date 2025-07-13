@@ -37,4 +37,7 @@ public partial class EpisodeViewModel : ObservableObject
     private double _downloadProgress;
 
     public bool IsDownloading => !IsDownloaded && DownloadProgress >0;
+
+    public CancellationTokenSource? DownloadCts { get; set; }
+
 }

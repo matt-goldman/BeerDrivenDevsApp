@@ -19,6 +19,15 @@ public partial class EpisodeCard : ContentView
         set => SetValue(DownloadCommandProperty, value);
     }
 
+    public static readonly BindableProperty CancelDownloadCommandProperty =
+        BindableProperty.Create(nameof(CancelDownloadCommand), typeof(ICommand), typeof(EpisodeCard));
+
+    public ICommand CancelDownloadCommand
+    {
+        get => (ICommand)GetValue(CancelDownloadCommandProperty);
+        set => SetValue(CancelDownloadCommandProperty, value);
+    }
+
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);

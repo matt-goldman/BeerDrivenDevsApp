@@ -74,7 +74,8 @@
                <CollectionView ItemsSource="{Binding LatestEpisodes}">
                       <CollectionView.ItemTemplate>
                           <DataTemplate>
-                        <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"/>
+                        <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"
+                                              CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                </CollectionView>

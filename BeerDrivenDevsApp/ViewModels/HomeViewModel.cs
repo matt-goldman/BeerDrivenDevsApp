@@ -11,7 +11,7 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     private bool _isRefreshing = false;
 
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
-    
+
     public Task Init() =>
         LoadLatestEpisodes();
 
@@ -37,11 +37,26 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     [RelayCommand(AllowConcurrentExecutions = true)]
     private async Task DownloadEpisode(EpisodeViewModel episode)
     {
-        if (episode.IsDownloaded)
+        if (episode.IsDownloaded || episode.IsDownloading)
             return;
 
+        episode.DownloadCts = new CancellationTokenSource();
+
         var progress = new Progress<double>(value => episode.DownloadProgress = value);
-        await episodes.DownloadEpisode(episode.EpisodeNumber, progress);
+        await episodes.DownloadEpisode(episode.EpisodeNumber, progress, episode.DownloadCts.Token);
         episode.IsDownloaded = true;
+    }
+
+    [RelayCommand]
+    private void CancelDownload(EpisodeViewModel episode)
+    {
+        if (episode.DownloadCts is not null)
+        {
+            episode.DownloadCts.Cancel();
+            episode.DownloadCts.Dispose();
+            episode.DownloadCts = null;
+        }
+        episode.IsDownloaded = false;
+        episode.DownloadProgress = 0;
     }
 }

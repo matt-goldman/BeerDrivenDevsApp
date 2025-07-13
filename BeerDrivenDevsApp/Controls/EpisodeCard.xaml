@@ -130,6 +130,8 @@
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
                                  IsVisible="{Binding IsDownloading}"
+                                 Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=CancelDownloadCommand}"
+                                 CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Size=12,
                                                           Glyph={x:Static controls:Icons.CircleX},
