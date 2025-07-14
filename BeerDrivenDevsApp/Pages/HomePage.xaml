@@ -11,7 +11,7 @@
     <Grid HorizontalOptions="Fill"
           VerticalOptions="Fill"
           RowDefinitions="2*, *, 12*"
-          Padding="30,30,30,0"
+          Padding="30,0,30,0"
           x:Name="MainLayout">
         <!--<FlexLayout Direction="Row"
                     JustifyContent="SpaceBetween">
@@ -55,8 +55,12 @@
                        Text="{x:Static controls:Icons.Beer}"/>
             </Grid>
         </FlexLayout>-->
-        
-        
+
+        <Image Source="bdd_logo.png"
+               HorizontalOptions="Fill"
+               Aspect="AspectFit"/>
+
+
         <Label VerticalOptions="Center"
                VerticalTextAlignment="Center"
                Text="Latest Episodes"
