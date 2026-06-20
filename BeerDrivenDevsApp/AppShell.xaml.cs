@@ -1,6 +1,8 @@
-﻿namespace BeerDrivenDevsApp;
+﻿using FlagstoneUI.Core.Controls;
 
-public partial class AppShell : Shell
+namespace BeerDrivenDevsApp;
+
+public partial class AppShell : FsShell
 {
     public AppShell()
     {

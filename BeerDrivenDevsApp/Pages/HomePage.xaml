@@ -25,7 +25,7 @@
                        HorizontalTextAlignment="Start"
                        VerticalTextAlignment="Center"
                        FontAttributes="Bold"
-                       FontFamily="ArialBold"
+                       FontFamily="OpenSansSemibold"
                        Text="Beer Driven Devs"/>
 
                 <Label TextColor="{StaticResource Amber700}"
@@ -35,7 +35,7 @@
                        VerticalTextAlignment="Center"
                        FontSize="Medium"
                        FontAttributes="Bold"
-                       FontFamily="ArialBold"
+                       FontFamily="OpenSansSemibold"
                        Text="Casual Chats with Mates"/>
             </VerticalStackLayout>
             <Grid>
@@ -66,7 +66,7 @@
                Text="Latest Episodes"
                FontSize="Large"
                FontAttributes="Bold"
-               FontFamily="ArialBold"
+               FontFamily="OpenSansSemibold"
                TextColor="{StaticResource Amber900}"
                Grid.Row="1"/>
         

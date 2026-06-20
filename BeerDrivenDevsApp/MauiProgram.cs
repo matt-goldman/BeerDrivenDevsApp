@@ -1,5 +1,6 @@
 ﻿using BeerDrivenDevsApp.Services;
 using CommunityToolkit.Maui;
+using FlagstoneUI.Core.Builders;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.SmartNavigation.Attributes;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -18,10 +19,11 @@ public static class MauiProgram
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("ArialBold.ttf", "OpenSansSemibold");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("lucide.ttf", "Lucide");
             })
             .UseSkiaSharp()
+            .UseFlagstoneUI()
             .UseAutodependencies();
 
         builder.Services.AddHttpClient<IFileDownloadService, FileDownloadService>();
