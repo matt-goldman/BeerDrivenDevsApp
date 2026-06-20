@@ -1,10 +1,12 @@
 ﻿using BeerDrivenDevsApp.Services;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.Maui.SmartNavigation.Attributes;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace BeerDrivenDevsApp;
 
+[UseAutoDependencies]
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

@@ -8,8 +8,7 @@ namespace BeerDrivenDevsApp.ViewModels;
 public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
 {
     [ObservableProperty]
-    private bool _isRefreshing = false;
-
+    public partial bool IsRefreshing { get; set; } = false;
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
 
     public Task Init() =>
@@ -48,7 +47,7 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     }
 
     [RelayCommand]
-    private void CancelDownload(EpisodeViewModel episode)
+    private static void CancelDownload(EpisodeViewModel episode)
     {
         if (episode.DownloadCts is not null)
         {

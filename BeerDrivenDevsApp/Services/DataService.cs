@@ -36,7 +36,7 @@ public class DataService
     {
         var collection = _db.GetCollection<Episode>();
 
-        bool episodeExists = await collection.ExistsAsync(x => x.EpisodeId == episode.EpisodeId);
+        var episodeExists = await collection.ExistsAsync(x => x.EpisodeId == episode.EpisodeId);
 
         if (episodeExists)
         {

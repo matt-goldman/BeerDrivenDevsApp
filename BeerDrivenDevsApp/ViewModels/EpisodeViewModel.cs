@@ -5,36 +5,36 @@ namespace BeerDrivenDevsApp.ViewModels;
 public partial class EpisodeViewModel : ObservableObject
 {
     [ObservableProperty]
-    private int _episodeNumber;
+    public partial int EpisodeNumber { get; set; }
 
     [ObservableProperty]
-    private string _title;
-    
-    [ObservableProperty]
-    private string _description;
+    public partial string Title { get; set; }
 
     [ObservableProperty]
-    private string _summary;
+    public partial string Description { get; set; }
 
     [ObservableProperty]
-    private string _duration;
+    public partial string Summary { get; set; }
 
     [ObservableProperty]
-    private DateTime _releasedOn;
+    public partial string Duration { get; set; }
 
     [ObservableProperty]
-    private string _audioUrl;
-    
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsDownloading))]
-    private bool _isDownloaded;
+    public partial DateTime ReleasedOn { get; set; }
 
     [ObservableProperty]
-    private string _thumbnailUrl;
+    public partial string AudioUrl { get; set; }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDownloading))]
-    private double _downloadProgress;
+    public partial bool IsDownloaded { get; set; }
+    
+    [ObservableProperty]
+    public partial string ThumbnailUrl { get; set; }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsDownloading))]
+    public partial double DownloadProgress { get; set; }
 
     public bool IsDownloading => !IsDownloaded && DownloadProgress >0;
 
