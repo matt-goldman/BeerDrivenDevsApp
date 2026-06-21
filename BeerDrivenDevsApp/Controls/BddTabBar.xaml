@@ -39,10 +39,11 @@
                 </VerticalStackLayout>
             </FlexLayout>
             
+            <!-- Background gradient bug on iOS, see: https://github.com/dotnet/maui/issues/36045 -->
             <ImageButton HeightRequest="50"
                          WidthRequest="50"
                          CornerRadius="25"
-                         Background="{DynamicResource BackgroundGradient}"
+                         Background="{OnPlatform iOS={StaticResource Amber600}, Default={StaticResource BackgroundGradient}}"
                          VerticalOptions="End"
                          HorizontalOptions="End"
                          Margin="5"
