@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Core;
 using FlagstoneUI.Core.Controls;
 
 namespace BeerDrivenDevsApp.Controls;
@@ -10,4 +11,16 @@ public partial class BddTabBar : FsTabBarBase
     }
 
     protected override Layout TabContainer => TabBar;
+
+    private void Expander_OnExpandedChanged(object? sender, ExpandedChangedEventArgs e)
+    {
+        if (e.IsExpanded)
+        {
+            _ = ChevronLabel.RotateToAsync(180);
+        }
+        else
+        {
+            _ = ChevronLabel.RotateToAsync(0);
+        }
+    }
 }

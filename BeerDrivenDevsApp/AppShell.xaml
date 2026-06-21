@@ -13,6 +13,22 @@
     <fs:FsShell.TabBar>
         <controls:BddTabBar/>
     </fs:FsShell.TabBar>
+    <fs:FsShell.TabBarItemTemplate>
+        <DataTemplate>
+            <HorizontalStackLayout HorizontalOptions="End"
+                                   x:DataType="fs:FsTabContext"
+                                   Spacing="5">
+                <Label Text="{Binding Title}"
+                       HorizontalOptions="End"
+                       HorizontalTextAlignment="End"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"/>
+                <Image VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Source="{Binding Icon}"/>
+            </HorizontalStackLayout>
+        </DataTemplate>
+    </fs:FsShell.TabBarItemTemplate>
 
     <TabBar>
         <ShellContent
