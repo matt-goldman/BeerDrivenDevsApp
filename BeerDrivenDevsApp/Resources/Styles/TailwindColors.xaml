@@ -10,6 +10,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
   <Color x:Key="Amber100">#FEF3C6</Color>
+  <Color x:Key="Amber150">#FEF6A1</Color>
   <Color x:Key="Amber200">#FEE685</Color>
   <Color x:Key="Amber300">#FFD230</Color>
   <Color x:Key="Amber400">#FFB900</Color>

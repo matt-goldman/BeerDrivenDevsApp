@@ -8,19 +8,22 @@
              x:Class="BeerDrivenDevsApp.Controls.BddTabBar">
     <fs:FsTabBarBase.ItemTemplate>
         <DataTemplate x:DataType="fs:FsTabContext">
-            <HorizontalStackLayout HorizontalOptions="End"
-                                   Spacing="5">
-                <Label Text="{Binding Title}"
-                       FontSize="32"
-                       TextColor="{DynamicResource Amber950}"
-                       HorizontalOptions="End"
-                       HorizontalTextAlignment="End"
-                       VerticalOptions="Center"
-                       VerticalTextAlignment="Center"/>
-                <Image VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       Source="{Binding Icon}"/>
-            </HorizontalStackLayout>
+            <Border StrokeThickness="1"
+                    StrokeShape="RoundRectangle 20"
+                    Padding="5"
+                    Stroke="{DynamicResource Amber300}">
+                <HorizontalStackLayout HorizontalOptions="Fill"
+                                       Spacing="5">
+                    <Image VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Source="{Binding Icon}"/>
+                    <Label Text="{Binding Title}"
+                           FontSize="32"
+                           TextColor="{DynamicResource Amber950}"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"/>
+                </HorizontalStackLayout>
+            </Border>
         </DataTemplate>
     </fs:FsTabBarBase.ItemTemplate>
     <Grid>
@@ -114,6 +117,7 @@
                     Padding="10">
                 <VerticalStackLayout x:Name="TabBar"
                                      Spacing="15"
+                                     TranslationY="300"
                                      BackgroundColor="{DynamicResource Amber100}" />
             </Border>
         </toolkit:Expander>

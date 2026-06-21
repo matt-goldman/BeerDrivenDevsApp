@@ -16,5 +16,6 @@ public partial class BddTabBar : FsTabBarBase
     private void Expander_OnExpandedChanged(object? sender, ExpandedChangedEventArgs e)
     {
         _ = ChevronLabel.RotateToAsync(e.IsExpanded ? 180 : 0);
+        _ = TabBar.TranslateToAsync(0, e.IsExpanded ? 0 : 300);
     }
 }

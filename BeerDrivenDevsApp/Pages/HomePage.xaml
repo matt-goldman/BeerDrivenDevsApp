@@ -34,6 +34,7 @@
             
             <ActivityIndicator IsVisible="{Binding IsCheckingForUpdates}"
                                IsRunning="{Binding IsCheckingForUpdates}"
+                               Scale="0.6"
                                Color="{DynamicResource Amber900}"/>
         </FlexLayout>
         

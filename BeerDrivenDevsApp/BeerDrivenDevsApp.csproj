@@ -24,7 +24,7 @@
         <ApplicationTitle>BeerDrivenDevsApp</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.beerdrivendevsapp</ApplicationId>
+        <ApplicationId>dev.beerdriven.app</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

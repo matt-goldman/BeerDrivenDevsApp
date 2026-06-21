@@ -19,18 +19,9 @@
             ContentTemplate="{DataTemplate pages:HomePage}"
             Icon="{FontImageSource FontFamily=Lucide,
                                    Color={DynamicResource Amber950},
-                                   Glyph={x:StaticResource House},
+                                   Glyph={x:StaticResource AudioLines},
                                    Size=32}"
             Route="HomePage" />
-        
-        <ShellContent
-            Title="Player"
-            ContentTemplate="{DataTemplate pages:PlayerPage}"
-            Icon="{FontImageSource FontFamily=Lucide,
-                                   Color={DynamicResource Amber950},
-                                   Glyph={x:StaticResource Play},
-                                   Size=32}"
-            Route="PlayerPage" />
         
         <ShellContent
             Title="Community"

@@ -101,7 +101,12 @@
     
     <LinearGradientBrush x:Key="PageBackground" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Offset="0" Color="{StaticResource Amber50}" />
-        <GradientStop Offset="1" Color="{StaticResource Orange50}" />
+        <GradientStop Offset="1" Color="{StaticResource Amber100}" />
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="TabBackground" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Offset="0" Color="{StaticResource Amber100}" />
+        <GradientStop Offset="1" Color="{StaticResource Amber150}" />
     </LinearGradientBrush>
 
 </ResourceDictionary>
