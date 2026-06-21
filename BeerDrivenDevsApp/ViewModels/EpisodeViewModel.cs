@@ -6,6 +6,9 @@ public partial class EpisodeViewModel : ObservableObject
 {
     [ObservableProperty]
     public partial int EpisodeNumber { get; set; }
+    
+    [ObservableProperty]
+    public partial bool IsNew { get; set; } = false;
 
     [ObservableProperty]
     public partial string Title { get; set; }

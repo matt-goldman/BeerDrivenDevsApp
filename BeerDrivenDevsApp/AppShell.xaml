@@ -18,32 +18,36 @@
             Title="Home"
             ContentTemplate="{DataTemplate pages:HomePage}"
             Icon="{FontImageSource FontFamily=Lucide,
+                                   Color={DynamicResource Amber950},
                                    Glyph={x:StaticResource House},
-                                   Size=24}"
+                                   Size=32}"
             Route="HomePage" />
         
         <ShellContent
             Title="Player"
             ContentTemplate="{DataTemplate pages:PlayerPage}"
             Icon="{FontImageSource FontFamily=Lucide,
+                                   Color={DynamicResource Amber950},
                                    Glyph={x:StaticResource Play},
-                                   Size=24}"
+                                   Size=32}"
             Route="PlayerPage" />
         
         <ShellContent
             Title="Community"
             ContentTemplate="{DataTemplate pages:CommunityPage}"
             Icon="{FontImageSource FontFamily=Lucide,
+                                   Color={DynamicResource Amber950},
                                    Glyph={x:StaticResource Users},
-                                   Size=24}"
+                                   Size=32}"
             Route="CommunityPage" />
         
         <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate pages:SettingsPage}"
             Icon="{FontImageSource FontFamily=Lucide,
+                                   Color={DynamicResource Amber950},
                                    Glyph={x:StaticResource Settings},
-                                   Size=24}"
+                                   Size=32}"
             Route="SettingsPage" />
     </TabBar>
     

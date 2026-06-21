@@ -9,27 +9,62 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
 {
     [ObservableProperty]
     public partial bool IsRefreshing { get; set; } = false;
+    
+    [ObservableProperty]
+    public partial bool IsCheckingForUpdates { get; set; } = false;
+
+    [ObservableProperty]
+    public partial string HeaderLabel { get; set; } = "Latest Episodes";
+    
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
 
     public Task Init() =>
-        LoadLatestEpisodes();
+        GetEpisodes();
 
     [RelayCommand]
     private async Task Refresh()
     {
         if (IsRefreshing)
             return;
-        await LoadLatestEpisodes();
+        await LoadNewEpisodes();
         IsRefreshing = false;
     }
 
-    private async Task LoadLatestEpisodes()
+    private async Task GetEpisodes()
     {
         IsRefreshing = true;
-        var latestEpisodes = await episodes.GetLatestEpisodes();
-        LatestEpisodes.Clear();
-        latestEpisodes.ForEach(e => LatestEpisodes.Add(e));
+        var existingEpisodes = await episodes.GetEpisodes();
+        existingEpisodes.ForEach(e => LatestEpisodes.Add(e));
         IsRefreshing = false;
+
+        await LoadNewEpisodes();
+    }
+
+    private async Task LoadNewEpisodes()
+    {
+        IsCheckingForUpdates = true;
+        HeaderLabel = "Checking for new episodes";
+        
+        var latestEpisodes = await episodes.GetLatestEpisodes();
+
+        foreach (var episode in latestEpisodes.Where(e => !LatestEpisodes.Contains(e)))
+        {
+            episode.IsNew = true;
+        }
+
+        if (latestEpisodes.Any(e => e.IsNew))
+        {
+            LatestEpisodes.Clear();
+
+            foreach (var episode in latestEpisodes.OrderByDescending(e => e.ReleasedOn))
+            {
+                LatestEpisodes.Add(episode);
+            }
+        }
+        
+        HeaderLabel = "Latest Episodes";
+        IsRefreshing = false;
+        IsCheckingForUpdates = false;
     }
 
     // Need to set allow concurrent executions to true to allow multiple downloads at the same time

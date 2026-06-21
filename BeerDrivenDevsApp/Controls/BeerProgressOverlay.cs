@@ -21,8 +21,8 @@ public class BeerProgressOverlayView : SKCanvasView
 
     private bool _isFoamAnimating = false;
 
-    private SKColor _gradientStart;
-    private SKColor _gradientEnd;
+    private readonly SKColor _gradientStart;
+    private readonly SKColor _gradientEnd;
 
     public BeerProgressOverlayView()
     {

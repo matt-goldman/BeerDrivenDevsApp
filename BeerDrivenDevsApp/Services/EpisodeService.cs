@@ -67,13 +67,7 @@ public class EpisodeService(
     public async Task<List<EpisodeViewModel>> GetEpisodes()
     {
         var dbEpisodes = await dataService.GetEpisodes();
-
-        if (dbEpisodes == null || dbEpisodes.Count == 0)
-        {
-            // If no episodes in the database, fetch from the RSS feed
-            return await GetLatestEpisodes();
-        }
-
+        
         // Convert the database episodes to view models
         return dbEpisodes.Select(e => e.ToViewModel()).ToList();
     }
@@ -86,7 +80,7 @@ public class EpisodeService(
 
         var episodes = BddFeedDeserializer.DeserializeFeed(testData);
 
-        if (episodes != null && episodes.Count != 0)
+        if (episodes.Count != 0)
         {
             await dataService.AddMissingEpisodes(episodes);
         }

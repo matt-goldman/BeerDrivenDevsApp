@@ -8,6 +8,7 @@ public partial class BddTabBar : FsTabBarBase
     public BddTabBar()
     {
         InitializeComponent();
+        InitializeTabContainer();
     }
 
     protected override Layout TabContainer => TabBar;

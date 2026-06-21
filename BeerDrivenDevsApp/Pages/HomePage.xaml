@@ -13,62 +13,29 @@
           RowDefinitions="2*, *, 12*"
           Padding="30,0,30,0"
           x:Name="MainLayout">
-        <!--<FlexLayout Direction="Row"
-                    JustifyContent="SpaceBetween">
-            <VerticalStackLayout HorizontalOptions="Center"
-                     VerticalOptions="Center"
-                     Spacing="5">
-                <Label FontSize="Title"
-                       TextColor="{StaticResource Amber900}"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSansSemibold"
-                       Text="Beer Driven Devs"/>
-
-                <Label TextColor="{StaticResource Amber700}"
-                       HorizontalOptions="Start"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSansSemibold"
-                       Text="Casual Chats with Mates"/>
-            </VerticalStackLayout>
-            <Grid>
-                <Ellipse HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         HeightRequest="85"
-                         WidthRequest="85"
-                         Background="{StaticResource BackgroundGradient}" />
-
-                <Label HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontFamily="Lucide"
-                       TextColor="{StaticResource Amber900}"
-                       FontSize="36"
-                       Text="{x:Static controls:Icons.Beer}"/>
-            </Grid>
-        </FlexLayout>-->
-
         <Image Source="bdd_logo.png"
                HorizontalOptions="Fill"
                Aspect="AspectFit"/>
 
 
-        <Label VerticalOptions="Center"
-               VerticalTextAlignment="Center"
-               Text="Latest Episodes"
-               FontSize="Large"
-               FontAttributes="Bold"
-               FontFamily="OpenSansSemibold"
-               TextColor="{StaticResource Amber900}"
-               Grid.Row="1"/>
+        <FlexLayout Grid.Row="1"
+                    HorizontalOptions="Fill"
+                    Direction="Row"
+                    JustifyContent="SpaceBetween"
+                    AlignContent="Center"
+                    AlignItems="Center">
+            <Label VerticalOptions="Center"
+                   VerticalTextAlignment="Center"
+                   Text="{Binding HeaderLabel}"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSansSemibold"
+                   TextColor="{StaticResource Amber900}"/>
+            
+            <ActivityIndicator IsVisible="{Binding IsCheckingForUpdates}"
+                               IsRunning="{Binding IsCheckingForUpdates}"
+                               Color="{DynamicResource Amber900}"/>
+        </FlexLayout>
         
         <RefreshView Command="{Binding RefreshCommand}"
                      IsRefreshing="{Binding IsRefreshing}"
@@ -76,8 +43,8 @@
                      VerticalOptions="Fill"
                      HorizontalOptions="Fill">
                <CollectionView ItemsSource="{Binding LatestEpisodes}">
-                      <CollectionView.ItemTemplate>
-                          <DataTemplate>
+                  <CollectionView.ItemTemplate>
+                      <DataTemplate>
                         <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"
                                               CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"/>
                     </DataTemplate>
