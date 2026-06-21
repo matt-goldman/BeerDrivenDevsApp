@@ -21,4 +21,10 @@ public class Episode
     public string Duration { get; set; } =  string.Empty;
 
     public string? AudioFilePath { get; set; } = null;
+
+    private TimeSpan _totalDuration = TimeSpan.Zero;
+    
+    public TimeSpan TotalListened { get; set; } = TimeSpan.Zero;
+    
+    public TimeSpan CurrentPosition { get; set; } = TimeSpan.Zero;
 }

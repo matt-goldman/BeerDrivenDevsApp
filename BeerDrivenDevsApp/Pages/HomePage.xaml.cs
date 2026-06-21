@@ -4,7 +4,7 @@ namespace BeerDrivenDevsApp.Pages;
 
 public partial class HomePage : ContentPage
 {
-    private HomeViewModel _viewModel;
+    private readonly HomeViewModel _viewModel;
     public HomePage(HomeViewModel viewModel)
     {
         InitializeComponent();
@@ -12,9 +12,9 @@ public partial class HomePage : ContentPage
         BindingContext = _viewModel;
     }
 
-    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-        await _viewModel.Init();
+        _ = _viewModel.Init();
     }
 }

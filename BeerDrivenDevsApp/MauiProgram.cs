@@ -25,6 +25,8 @@ public static class MauiProgram
             .UseSkiaSharp()
             .UseFlagstoneUI()
             .UseAutodependencies();
+        
+        builder.Services.AddSingleton<INavigationStateService , NavigationStateService>();
 
         builder.Services.AddHttpClient<IFileDownloadService, FileDownloadService>();
         builder.Services.AddHttpClient<IEpisodeService, EpisodeService>(opt => opt.BaseAddress = new Uri("https://www.beerdriven.dev"));
