@@ -7,8 +7,8 @@
     xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
     xmlns:pages="clr-namespace:BeerDrivenDevsApp.Pages"
     TabBarIsDocked="False"
+    BackgroundColor="Transparent"
     NavBarIsVisible="False"
-    BackgroundColor="Blue"
     Title="BeerDrivenDevsApp">
     <fs:FsShell.TabBar>
         <controls:BddTabBar/>

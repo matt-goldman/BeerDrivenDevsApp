@@ -4,33 +4,52 @@
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
              BackgroundColor="Transparent"
+             InputTransparent="True"
              x:Class="BeerDrivenDevsApp.Controls.BddTabBar">
-    <Grid VerticalOptions="Fill"
-          HorizontalOptions="Fill"
-          ColumnDefinitions="*, 70"
-          Background="Transparent">
-        <FlexLayout x:Name="TabBar"
-                    VerticalOptions="End"
-                    Direction="Row"
-                    JustifyContent="SpaceBetween"
-                    AlignContent="Center"
-                    AlignItems="Center"
-                    HorizontalOptions="Fill"
-                    HeightRequest="60">
-            <Image HeightRequest="55"
-                   WidthRequest="55"
-                   x:Name="EpisodeThumbnail"
-                   Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
-                                                          Glyph={x:Static controls:Icons.Image}}"/>
+    <Border BackgroundColor="{DynamicResource Amber100}"
+            HorizontalOptions="Fill"
+            VerticalOptions="End"
+            Margin="5,0,5,30"
+            StrokeShape="RoundRectangle 20">
+        <Grid VerticalOptions="Fill"
+              HorizontalOptions="Fill"
+              ColumnDefinitions="*, 70"
+              BackgroundColor="Transparent">
+            <FlexLayout x:Name="TabBar"
+                        VerticalOptions="End"
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        AlignContent="Center"
+                        AlignItems="Center"
+                        HorizontalOptions="Fill"
+                        HeightRequest="60">
+                <Image HeightRequest="55"
+                       WidthRequest="55"
+                       x:Name="EpisodeThumbnail"
+                       Source="{FontImageSource FontFamily=Lucide,
+                                                Size=12,
+                                                Glyph={x:Static controls:Icons.Image}}"/>
+                
+                <VerticalStackLayout WidthRequest="150"
+                                     x:Name="EpisodeTitleMarquee">
+                    <Label FontAttributes="Bold"
+                           Text="Episode 59: Things"/>
+                    <Label FontSize="Small"
+                           Text="00:15 / 52:43"/>
+                </VerticalStackLayout>
+            </FlexLayout>
             
-            <VerticalStackLayout WidthRequest="150"
-                                 x:Name="EpisodeTitleMarquee">
-                <Label FontAttributes="Bold"
-                       Text="Episode 59: Things"/>
-                <Label FontSize="Small"
-                       Text="00:15 / 52:43"/>
-            </VerticalStackLayout>
-        </FlexLayout>
-    </Grid>
+            <ImageButton HeightRequest="50"
+                         WidthRequest="50"
+                         CornerRadius="25"
+                         Background="{DynamicResource BackgroundGradient}"
+                         VerticalOptions="End"
+                         HorizontalOptions="End"
+                         Margin="5"
+                         Grid.Column="1"
+                         Source="{FontImageSource FontFamily=Lucide,
+                                                  Color=Black,
+                                                  Glyph={x:Static controls:Icons.ChevronsUp}}"/>
+        </Grid>
+    </Border>
 </fs:FsTabBarBase>
