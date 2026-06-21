@@ -26,6 +26,7 @@
         <Border BackgroundColor="{DynamicResource Amber100}"
                 HorizontalOptions="Fill"
                 VerticalOptions="End"
+                Margin="5"
                 StrokeShape="RoundRectangle 20">
             <FlexLayout VerticalOptions="End"
                         Direction="Row"
@@ -33,8 +34,8 @@
                         AlignContent="Center"
                         AlignItems="Center"
                         HorizontalOptions="Fill"
-                        HeightRequest="60"
-                        Margin="0,0,60,0">
+                        HeightRequest="70"
+                        Margin="0,0,70,0">
                 <Image HeightRequest="55"
                        WidthRequest="55"
                        x:Name="EpisodeThumbnail"
@@ -42,20 +43,50 @@
                                                 Size=12,
                                                 Glyph={x:Static controls:Icons.Image}}"/>
                 
-                <VerticalStackLayout WidthRequest="150"
+                <VerticalStackLayout WidthRequest="100"
                                      x:Name="EpisodeTitleMarquee">
                     <Label FontAttributes="Bold"
+                           FontFamily="OpenSansSemibold"
                            Text="Episode 59: Things"/>
                     <Label FontSize="Small"
                            Text="00:15 / 52:43"/>
                 </VerticalStackLayout>
+                
+                <HorizontalStackLayout Spacing="5"
+                                      VerticalOptions="Center">
+                    <ImageButton HorizontalOptions="Center"
+                                 WidthRequest="30"
+                                 Rotation="120"
+                                 Padding="10"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color=Black,
+                                                          Glyph={x:Static controls:Icons.IterationCcw}}"/>
+                    
+                    <ImageButton HorizontalOptions="Center"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 CornerRadius="25"
+                                 Padding="7"
+                                 BackgroundColor="{DynamicResource Amber600}"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color=Black,
+                                                          Glyph={x:Static controls:Icons.Play}}"/>
+                    
+                    <ImageButton HorizontalOptions="Center"
+                                 WidthRequest="30"
+                                 Rotation="240"
+                                 Padding="10"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color=Black,
+                                                          Glyph={x:Static controls:Icons.IterationCw}}"/>
+                </HorizontalStackLayout>
             </FlexLayout>
         </Border>
             
         <toolkit:Expander VerticalOptions="End"
                           HorizontalOptions="End"
                           Direction="Up"
-                          Margin="5"
+                          Margin="10,0,15,15"
                           ExpandedChanged="Expander_OnExpandedChanged">
             <toolkit:Expander.Header>
                 <Border HeightRequest="50"
