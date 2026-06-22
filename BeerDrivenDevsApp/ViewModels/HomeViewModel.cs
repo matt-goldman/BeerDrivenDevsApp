@@ -24,8 +24,6 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     [RelayCommand]
     private async Task Refresh()
     {
-        if (IsRefreshing)
-            return;
         await LoadNewEpisodes();
         IsRefreshing = false;
     }

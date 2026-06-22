@@ -20,10 +20,10 @@
             Padding="0"
             BackgroundColor="{StaticResource Card}"
             x:DataType="vm:EpisodeViewModel">
-        <Grid RowDefinitions="9*, 7*"
+        <Grid RowDefinitions="9*, 6*"
               VerticalOptions="Fill"
               HorizontalOptions="Fill"
-              MaximumHeightRequest="300"
+              MaximumHeightRequest="400"
               Margin="0"
               Padding="0">
             <Grid>
@@ -43,6 +43,18 @@
                                            VerticalOptions="Fill"
                                            Progress="{Binding DownloadProgress}"
                                            x:Name="DownloadProgressView" />
+                
+                <ImageButton HorizontalOptions="End"
+                             VerticalOptions="End"
+                             WidthRequest="50"
+                             HeightRequest="50"
+                             CornerRadius="25"
+                             Margin="10"
+                             Padding="9,7,7,7"
+                             BackgroundColor="{DynamicResource Amber600}"
+                             Source="{FontImageSource FontFamily=Lucide,
+                                                          Color={DynamicResource Amber950},
+                                                          Glyph={x:Static controls:Icons.Play}}"/>
 
                 <Label HorizontalOptions="Center"
                        VerticalOptions="Center"
@@ -117,13 +129,13 @@
                             HorizontalOptions="Start"
                             Grid.Column="1">
                     <ImageButton HorizontalOptions="Center"
-                                 MaximumWidthRequest="20"
+                                 MaximumWidthRequest="{OnPlatform Android=40}"
                                  IsEnabled="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"
                                  IsVisible="{Binding IsDownloading, Converter={StaticResource InvertedBool}}"
                                  Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=DownloadCommand}"
                                  CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Download},
                                                           Color={Binding IsDownloaded, Converter={StaticResource IsDownloadedConverter}}}"/>
 
@@ -133,14 +145,14 @@
                                  Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=CancelDownloadCommand}"
                                  CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.CircleX},
                                                           Color={StaticResource Rose400}}"/>
 
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Share2},
                                                           Color={StaticResource Amber700}}"/>
 
@@ -148,7 +160,7 @@
                                  IsVisible="{Binding IsDownloaded}"
                                  MaximumWidthRequest="20"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Trash},
                                                           Color={StaticResource Amber700}}"/>
                 </FlexLayout>
