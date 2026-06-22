@@ -2,19 +2,20 @@ using BeerDrivenDevsApp.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using Plugin.Maui.SmartNavigation.Behaviours;
 
 namespace BeerDrivenDevsApp.ViewModels;
 
-public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
+public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject, IViewModelLifecycle
 {
     [ObservableProperty]
     public partial bool IsRefreshing { get; set; } = false;
     
     [ObservableProperty]
-    public partial bool IsCheckingForUpdates { get; set; } = false;
+    public partial bool IsBusy { get; set; } = false;
 
     [ObservableProperty]
-    public partial string HeaderLabel { get; set; } = "Latest Episodes";
+    public partial string Title { get; set; } = "Latest Episodes";
     
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
 
@@ -23,9 +24,14 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     // bail out so LoadNewEpisodes doesn't run twice concurrently. The initial-load path owns the
     // IsRefreshing lifecycle and clears it when done.
     private bool _isInitialLoad;
-
-    public Task Init() =>
-        GetEpisodes();
+    
+    public async Task OnInitAsync(bool isFirstNavigation)
+    {
+        if (isFirstNavigation)
+        {
+            await GetEpisodes();
+        }
+    }
 
     [RelayCommand]
     private async Task Refresh()
@@ -53,8 +59,8 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
 
     private async Task LoadNewEpisodes()
     {
-        IsCheckingForUpdates = true;
-        HeaderLabel = "Checking for new episodes";
+        IsBusy = true;
+        Title = "Checking for new episodes";
         
         var latestEpisodes = await episodes.GetLatestEpisodes();
 
@@ -73,9 +79,9 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
             }
         }
         
-        HeaderLabel = "Latest Episodes";
+        Title = "Latest Episodes";
         IsRefreshing = false;
-        IsCheckingForUpdates = false;
+        IsBusy = false;
     }
 
     // Need to set allow concurrent executions to true to allow multiple downloads at the same time

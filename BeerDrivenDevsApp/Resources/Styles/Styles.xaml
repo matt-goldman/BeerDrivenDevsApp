@@ -423,6 +423,10 @@
         <Setter Property="Background" Value="{StaticResource PageBackground}" />
         <Setter Property="fs:FsLayout.BottomChromePadding" Value="{DynamicResource FsBottomChromeHeight}" />
     </Style>
+    
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="ControlTemplate" Value="{DynamicResource PageTemplate}" />
+    </Style>
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
         <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />

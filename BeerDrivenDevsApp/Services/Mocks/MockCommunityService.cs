@@ -10,7 +10,7 @@ public class MockCommunityService(IEpisodeService episodeService) : ICommunitySe
         
         var summaries = new List<DiscussionSummary>();
 
-        foreach (var episode in episodes)
+        foreach (var episode in episodes.OrderByDescending(e => e.ReleasedOn).Take(10))
         {
             summaries.Add(new DiscussionSummary
             {
@@ -18,6 +18,7 @@ public class MockCommunityService(IEpisodeService episodeService) : ICommunitySe
                 EpisodeTitle    = episode.Title,
                 ReleaseDate     = DateOnly.FromDateTime(episode.ReleasedOn),
                 CommentCount    = Random.Shared.Next(0, 10),
+                Thumbnail       = episode.ThumbnailUrl
             });
         }
         

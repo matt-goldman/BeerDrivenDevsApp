@@ -14,7 +14,7 @@ public partial class DiscussionCardViewModel : ObservableObject
     public partial string Title { get; set; } = string.Empty;
     
     [ObservableProperty]
-    public partial DateTime ReleaseDate { get; set; }
+    public partial string ReleaseDate { get; set; } = string.Empty;
     
     [ObservableProperty]
     public partial string CommentCount { get; set; } = string.Empty;

@@ -1,4 +1,5 @@
 ﻿using BeerDrivenDevsApp.Services;
+using BeerDrivenDevsApp.Services.Mocks;
 using CommunityToolkit.Maui;
 using FlagstoneUI.Core.Builders;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,8 @@ public static class MauiProgram
             .UseAutodependencies();
         
         builder.Services.AddSingleton<INavigationStateService , NavigationStateService>();
+        
+        builder.Services.AddSingleton<ICommunityService, MockCommunityService>();
 
         builder.Services.AddHttpClient<IFileDownloadService, FileDownloadService>();
         builder.Services.AddHttpClient<IEpisodeService, EpisodeService>(opt => opt.BaseAddress = new Uri("https://www.beerdriven.dev"));

@@ -1,18 +1,40 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ControlTemplate x:Key="PageTemplate">
-        <Grid Margin="0"
-              Padding="0"
-              BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLight},
-                                                Dark={StaticResource OutgoingBubbleColorDark}}"
-              HorizontalOptions="Fill"
-              VerticalOptions="Fill">
-            <Border BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight},
-                                                      Dark={StaticResource BackgroundColorDark}}"
-                    StrokeShape="RoundRectangle 20,20,0,0"
-                    StrokeThickness="0">
-                <ContentPresenter />
-            </Border>
+        <Grid HorizontalOptions="Fill"
+              VerticalOptions="Fill"
+              RowDefinitions="*, *, 12*"
+              Padding="15,0,15,0"
+              Background="{DynamicResource PageBackground}"
+              BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}"
+              x:Name="MainLayout">
+            <Image Source="bdd_logo_wide.png"
+                   HorizontalOptions="Fill"
+                   Aspect="AspectFit"/>
+            <FlexLayout Grid.Row="1"
+                        HorizontalOptions="Fill"
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        AlignContent="Center"
+                        AlignItems="Center">
+                <Label VerticalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Title}"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
+                       TextColor="{StaticResource Amber900}"/>
+            
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                   IsRunning="{Binding IsBusy}"
+                                   Scale="0.6"
+                                   Color="{DynamicResource Amber900}"/>
+            </FlexLayout>
+            
+            <ContentPresenter Grid.Row="2" />
         </Grid>
     </ControlTemplate>
 </ResourceDictionary>

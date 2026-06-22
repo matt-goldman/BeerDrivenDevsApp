@@ -6,35 +6,52 @@
              x:DataType="vm:DiscussionCardViewModel"
              x:Class="BeerDrivenDevsApp.Controls.DiscussionHeaderCard">
     <fs:FsCard BorderColor="{DynamicResource Amber300}"
-               Background="{DynamicResource BackgroundGradient}"
-               HorizontalOptions="Fill"
-               HeightRequest="80">
-        <Grid ColumnDefinitions="70, *">
+               BackgroundColor="{DynamicResource Card}"
+               BorderWidth="1"
+               CornerRadius="20"
+               HeightRequest="80"
+               Margin="0,10">
+        <Grid ColumnDefinitions="70, *"
+              VerticalOptions="Center">
             <Image Source="{Binding Thumbnail}"
-                   WidthRequest="70"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   VerticalOptions="Center"
                    Aspect="AspectFill">
-                <Image.Clip><RoundRectangleGeometry CornerRadius="10" /></Image.Clip>
+                <Image.Clip><RoundRectangleGeometry Rect="0,0,50,50" CornerRadius="10" /></Image.Clip>
             </Image>
             
-            <HorizontalStackLayout Grid.Column="1"
-                                   Spacing="1">
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="5">
                 <Label Text="{Binding EpisodeNumber, StringFormat='EP {0}'}"
                        TextColor="{DynamicResource Amber600}"
-                       FontSize="8"/>
-                <Label Text="{Binding Title}"
+                       FontSize="10"
                        FontAttributes="Bold"
                        FontFamily="OpenSansSemibold"/>
+                <Label Text="{Binding Title}"
+                       MaxLines="1"
+                       LineBreakMode="TailTruncation"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
+                       Margin="0,0,10,0"/>
                 <HorizontalStackLayout Spacing="2">
                     <Label FontFamily="Lucide"
-                           FontSize="8"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
                            Text="{StaticResource MessageCircle}" />
                     <Label Text="{Binding CommentCount}"
-                           FontSize="8"/>
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="10"/>
                     <Label Text="{Binding ReleaseDate}"
-                           FontSize="8"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0"
                            IsVisible="{Binding IsReleaseDateVisible}"/>
                 </HorizontalStackLayout>
-            </HorizontalStackLayout>
+            </VerticalStackLayout>
         </Grid>
     </fs:FsCard>
 </ContentView>

@@ -4,6 +4,8 @@ public class DiscussionSummary
 {
     public int EpisodeId { get; set; }
     
+    public required string Thumbnail { get; set; }
+    
     public required string EpisodeTitle { get; set; }
 
     public int CommentCount { get; set; }

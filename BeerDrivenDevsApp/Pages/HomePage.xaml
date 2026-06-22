@@ -3,53 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
              xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
+             xmlns:sn="clr-namespace:Plugin.Maui.SmartNavigation.Behaviours;assembly=Plugin.Maui.SmartNavigation"
              x:DataType="vm:HomeViewModel"
              x:Name="HomePageRef"
              x:Class="BeerDrivenDevsApp.Pages.HomePage"
              NavigationPage.HasNavigationBar="False">
-    <Grid HorizontalOptions="Fill"
-          VerticalOptions="Fill"
-          RowDefinitions="*, *, 12*"
-          Padding="30,0,30,0"
-          x:Name="MainLayout">
-        <Image Source="bdd_logo_wide.png"
-               HorizontalOptions="Fill"
-               Aspect="AspectFit"/>
-
-
-        <FlexLayout Grid.Row="1"
-                    HorizontalOptions="Fill"
-                    Direction="Row"
-                    JustifyContent="SpaceBetween"
-                    AlignContent="Center"
-                    AlignItems="Center">
-            <Label VerticalOptions="Center"
-                   VerticalTextAlignment="Center"
-                   Text="{Binding HeaderLabel}"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   FontFamily="OpenSansSemibold"
-                   TextColor="{StaticResource Amber900}"/>
-            
-            <ActivityIndicator IsVisible="{Binding IsCheckingForUpdates}"
-                               IsRunning="{Binding IsCheckingForUpdates}"
-                               Scale="0.6"
-                               Color="{DynamicResource Amber900}"/>
-        </FlexLayout>
-        
-        <RefreshView Command="{Binding RefreshCommand}"
-                     IsRefreshing="{Binding IsRefreshing}"
-                     Grid.Row="2"
-                     VerticalOptions="Fill"
-                     HorizontalOptions="Fill">
-               <CollectionView ItemsSource="{Binding LatestEpisodes}">
-                  <CollectionView.ItemTemplate>
-                      <DataTemplate>
-                        <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"
-                                              CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-               </CollectionView>
-        </RefreshView>
-    </Grid>
+    <ContentPage.Behaviors>
+        <sn:NavigatedInitBehavior />
+    </ContentPage.Behaviors>
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Grid.Row="2"
+                 VerticalOptions="Fill"
+                 HorizontalOptions="Fill">
+           <CollectionView ItemsSource="{Binding LatestEpisodes}">
+              <CollectionView.ItemTemplate>
+                  <DataTemplate>
+                    <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"
+                                          CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+           </CollectionView>
+    </RefreshView>
 </ContentPage>
