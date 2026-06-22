@@ -18,24 +18,37 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject
     
     public ObservableCollection<EpisodeViewModel> LatestEpisodes { get; set; } = [];
 
+    // Not bound to the UI. While the initial load is running we set IsRefreshing = true to show the
+    // RefreshView spinner, which also fires RefreshCommand. This flag lets that auto-triggered Refresh
+    // bail out so LoadNewEpisodes doesn't run twice concurrently. The initial-load path owns the
+    // IsRefreshing lifecycle and clears it when done.
+    private bool _isInitialLoad;
+
     public Task Init() =>
         GetEpisodes();
 
     [RelayCommand]
     private async Task Refresh()
     {
+        // Suppress the refresh that the programmatic IsRefreshing = true triggers during initial load;
+        // GetEpisodes is already loading and will clear IsRefreshing itself.
+        if (_isInitialLoad)
+            return;
+
         await LoadNewEpisodes();
-        IsRefreshing = false;
     }
 
     private async Task GetEpisodes()
     {
+        _isInitialLoad = true;
         IsRefreshing = true;
+
         var existingEpisodes = await episodes.GetEpisodes();
         existingEpisodes.ForEach(e => LatestEpisodes.Add(e));
-        IsRefreshing = false;
 
         await LoadNewEpisodes();
+
+        _isInitialLoad = false;
     }
 
     private async Task LoadNewEpisodes()
