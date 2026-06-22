@@ -129,7 +129,8 @@
                           HorizontalOptions="End"
                           Direction="Up"
                           Margin="10,0,15,15"
-                          ExpandedChanged="Expander_OnExpandedChanged">
+                          ExpandedChanged="Expander_OnExpandedChanged"
+                          x:Name="NavExpander">
             <toolkit:Expander.Header>
                 <Border HeightRequest="50"
                         WidthRequest="50"

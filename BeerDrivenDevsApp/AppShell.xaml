@@ -11,7 +11,7 @@
     NavBarIsVisible="False"
     Title="BeerDrivenDevsApp">
     <fs:FsShell.TabBar>
-        <controls:BddTabBar/>
+        <controls:BddTabBar x:Name="NavBar"/>
     </fs:FsShell.TabBar>
     <TabBar>
         <ShellContent

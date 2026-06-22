@@ -8,4 +8,10 @@ public partial class AppShell : FsShell
     {
         InitializeComponent();
     }
+
+    protected override void OnNavigated(ShellNavigatedEventArgs args)
+    {
+        base.OnNavigated(args);
+        NavBar.HandleNavigated();
+    } 
 }
