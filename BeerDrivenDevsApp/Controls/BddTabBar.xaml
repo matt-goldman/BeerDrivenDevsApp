@@ -59,32 +59,43 @@
                         AlignItems="Center"
                         HorizontalOptions="Fill"
                         HeightRequest="70"
-                        Margin="0,0,70,0">
-                <Image HeightRequest="55"
-                       WidthRequest="55"
-                       Margin="5,0,0,0"
-                       x:Name="EpisodeThumbnail"
-                       Source="{FontImageSource FontFamily=Lucide,
-                                                Size=12,
-                                                Glyph={x:Static controls:Icons.Image}}"/>
-                
-                <VerticalStackLayout WidthRequest="120"
+                        Margin="0,0,65,0">
+                <Border Margin="5,0,0,0"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10"
+                        WidthRequest="55"
+                        HeightRequest="55"
+                        BackgroundColor="{DynamicResource Gray100}">
+                    <Image HeightRequest="30"
+                           WidthRequest="30"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="EpisodeThumbnail"
+                           Source="{FontImageSource FontFamily=Lucide,
+                                                    Color={DynamicResource Gray700},
+                                                    Glyph={x:Static controls:Icons.Beer}}"/>
+                </Border>
+                <VerticalStackLayout WidthRequest="150"
                                      x:Name="EpisodeTitleMarquee">
                     <ScrollView Orientation="Horizontal">
                         <Label FontAttributes="Bold"
                                FontFamily="OpenSansSemibold"
-                               Text="Episode 59: Things"/>
+                               Text="Episode 59: Things and stuff long title as I need to see where it ends"/>
                     </ScrollView>
-                    <Label FontSize="Small"
+                    <Label FontSize="8"
                            Text="00:15 / 52:43"/>
                 </VerticalStackLayout>
                 
-                <HorizontalStackLayout Spacing="5"
-                                      VerticalOptions="Center">
+                <Grid ColumnSpacing="10"
+                      WidthRequest="120"
+                      HorizontalOptions="End"
+                      VerticalOptions="Center"
+                      ColumnDefinitions="30,40,30">
                     <ImageButton HorizontalOptions="Center"
-                                 WidthRequest="30"
                                  Rotation="120"
                                  Padding="10"
+                                 WidthRequest="10"
+                                 Margin="0"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
                                                           Glyph={x:Static controls:Icons.IterationCcw}}"/>
@@ -92,21 +103,25 @@
                     <ImageButton HorizontalOptions="Center"
                                  WidthRequest="50"
                                  HeightRequest="50"
+                                 Margin="0"
                                  CornerRadius="25"
                                  Padding="9,7,7,7"
                                  BackgroundColor="{DynamicResource Amber600}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
-                                                          Glyph={x:Static controls:Icons.Play}}"/>
+                                                          Glyph={x:Static controls:Icons.Play}}"
+                                 Grid.Column="1"/>
                     
                     <ImageButton HorizontalOptions="Center"
-                                 WidthRequest="30"
+                                 WidthRequest="10"
                                  Rotation="240"
                                  Padding="10"
+                                 Margin="0"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
-                                                          Glyph={x:Static controls:Icons.IterationCw}}"/>
-                </HorizontalStackLayout>
+                                                          Glyph={x:Static controls:Icons.IterationCw}}"
+                                 Grid.Column="2"/>
+                </Grid>
             </FlexLayout>
         </Border>
             

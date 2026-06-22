@@ -9,10 +9,10 @@
              NavigationPage.HasNavigationBar="False">
     <Grid HorizontalOptions="Fill"
           VerticalOptions="Fill"
-          RowDefinitions="2*, *, 12*"
+          RowDefinitions="*, *, 12*"
           Padding="30,0,30,0"
           x:Name="MainLayout">
-        <Image Source="bdd_logo.png"
+        <Image Source="bdd_logo_wide.png"
                HorizontalOptions="Fill"
                Aspect="AspectFit"/>
 

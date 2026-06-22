@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BeerDrivenDevsApp.ViewModels;
 
-public partial class CommunityCardViewModel : ObservableObject
+public partial class DiscussionCardViewModel : ObservableObject
 {
     [ObservableProperty]
     public partial string Thumbnail { get; set; } = string.Empty;
@@ -17,5 +17,8 @@ public partial class CommunityCardViewModel : ObservableObject
     public partial DateTime ReleaseDate { get; set; }
     
     [ObservableProperty]
-    public partial int CommentCount { get; set; }
+    public partial string CommentCount { get; set; } = string.Empty;
+    
+    [ObservableProperty]
+    public partial bool IsReleaseDateVisible { get; set; }
 }
