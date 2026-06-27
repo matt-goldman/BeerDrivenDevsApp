@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BeerDrivenDevsApp.ViewModels;
 
 namespace BeerDrivenDevsApp.Pages;
 
 public partial class CommunityPage : ContentPage
 {
-    public CommunityPage()
+    public CommunityPage(CommunityViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
+             x:DataType="vm:DiscussionCardViewModel"
+             x:Class="BeerDrivenDevsApp.Controls.DiscussionHeaderCard">
+    <fs:FsCard BorderColor="{DynamicResource Amber300}"
+               BackgroundColor="{DynamicResource Card}"
+               BorderWidth="1"
+               CornerRadius="20"
+               HeightRequest="80"
+               Margin="0,10">
+        <Grid ColumnDefinitions="70, *"
+              VerticalOptions="Center">
+            <Image Source="{Binding Thumbnail}"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   VerticalOptions="Center"
+                   Aspect="AspectFill">
+                <Image.Clip><RoundRectangleGeometry Rect="0,0,50,50" CornerRadius="10" /></Image.Clip>
+            </Image>
+            
+            <VerticalStackLayout Grid.Column="1"
+                                 Spacing="5">
+                <Label Text="{Binding EpisodeNumber, StringFormat='EP {0}'}"
+                       TextColor="{DynamicResource Amber600}"
+                       FontSize="10"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"/>
+                <Label Text="{Binding Title}"
+                       MaxLines="1"
+                       LineBreakMode="TailTruncation"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
+                       Margin="0,0,10,0"/>
+                <HorizontalStackLayout Spacing="2">
+                    <Label FontFamily="Lucide"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           Text="{StaticResource MessageCircle}" />
+                    <Label Text="{Binding CommentCount}"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="10"/>
+                    <Label Text="{Binding ReleaseDate}"
+                           FontSize="10"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           Margin="10,0"
+                           IsVisible="{Binding IsReleaseDateVisible}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+    </fs:FsCard>
+</ContentView>

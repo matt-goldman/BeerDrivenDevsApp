@@ -5,11 +5,11 @@ namespace BeerDrivenDevsApp.Services;
 
 public interface IEpisodeService
 {
-    Task<List<EpisodeViewModel>> GetEpisodes();
+    Task<List<EpisodeViewModel>> GetEpisodes(CancellationToken cancellationToken = default);
 
-    Task<List<EpisodeViewModel>> GetLatestEpisodes();
+    Task<List<EpisodeViewModel>> GetLatestEpisodes(CancellationToken cancellationToken = default);
 
-    Task UpdateEpisode(EpisodeViewModel episode);
+    Task UpdateEpisode(EpisodeViewModel episode, CancellationToken cancellationToken = default);
 
     Task DownloadEpisode(int episode, IProgress<double> progress, CancellationToken cancellationToken);
 }
@@ -23,7 +23,7 @@ public class EpisodeService(
 
     public async Task DownloadEpisode(int episodeNumber, IProgress<double> progress, CancellationToken cancellationToken)
     {
-        var episode = await dataService.GetEpisode(episodeNumber);
+        var episode = await dataService.GetEpisode(episodeNumber, cancellationToken);
         
         if (episode == null)
             // TODO: Handle this more gracefully in the UI
@@ -61,45 +61,39 @@ public class EpisodeService(
 
         await downloads.DownloadFileAsync(downloadUrl, episode.AudioFilePath, progress, cancellationToken);
         episode.IsDownloaded = true;
-        await dataService.UpsertEpisode(episode);
+        await dataService.UpsertEpisode(episode, cancellationToken);
     }
 
-    public async Task<List<EpisodeViewModel>> GetEpisodes()
+    public async Task<List<EpisodeViewModel>> GetEpisodes(CancellationToken cancellationToken = default)
     {
-        var dbEpisodes = await dataService.GetEpisodes();
-
-        if (dbEpisodes == null || dbEpisodes.Count == 0)
-        {
-            // If no episodes in the database, fetch from the RSS feed
-            return await GetLatestEpisodes();
-        }
-
+        var dbEpisodes = await dataService.GetEpisodes(cancellationToken);
+        
         // Convert the database episodes to view models
         return dbEpisodes.Select(e => e.ToViewModel()).ToList();
     }
 
-    public async Task<List<EpisodeViewModel>> GetLatestEpisodes()
+    public async Task<List<EpisodeViewModel>> GetLatestEpisodes(CancellationToken cancellationToken = default)
     {
-        var rssFeed = await httpClient.GetStreamAsync("/episodes/index.xml");
+        var rssFeed = await httpClient.GetStreamAsync("/episodes/index.xml", cancellationToken);
         using var reader = new StreamReader(rssFeed);
-        var testData = await reader.ReadToEndAsync();
+        var testData = await reader.ReadToEndAsync(cancellationToken);
 
         var episodes = BddFeedDeserializer.DeserializeFeed(testData);
 
-        if (episodes != null && episodes.Count != 0)
+        if (episodes.Count != 0)
         {
-            await dataService.AddMissingEpisodes(episodes);
+            await dataService.AddMissingEpisodes(episodes, cancellationToken);
         }
 
-        var latestDbEpisodes = await dataService.GetLatestEpisodes(6);
+        var latestDbEpisodes = await dataService.GetLatestEpisodes(6, cancellationToken);
 
         return latestDbEpisodes.Select(e => e.ToViewModel()).ToList();
     }
 
-    public Task UpdateEpisode(EpisodeViewModel episode)
+    public Task UpdateEpisode(EpisodeViewModel episode, CancellationToken cancellationToken = default)
     { 
         var dbEpisode = episode.ToModel();
 
-        return dataService.UpsertEpisode(dbEpisode);
+        return dataService.UpsertEpisode(dbEpisode, cancellationToken);
     }
 }

@@ -5,6 +5,7 @@ namespace BeerDrivenDevsApp.Services;
 
 public class DataService
 {
+    // TODO: Replace LiteDB with Cabinet
     private readonly LiteDatabaseAsync _db;
 
     public DataService()
@@ -17,7 +18,7 @@ public class DataService
         _db = new LiteDatabaseAsync(dbPath);
     }
 
-    public async Task<List<Episode>> GetEpisodes()
+    public async Task<List<Episode>> GetEpisodes(CancellationToken  cancellationToken = default)
     {
         var collection = _db.GetCollection<Episode>();
         var results = await collection.FindAllAsync();
@@ -25,18 +26,18 @@ public class DataService
         return results.ToList();
     }
 
-    public async Task<Episode?> GetEpisode(int episodeNumber)
+    public async Task<Episode?> GetEpisode(int episodeNumber, CancellationToken cancellationToken = default)
     {
         var collection = _db.GetCollection<Episode>();
         var result = await collection.FindOneAsync(x => x.EpisodeId == episodeNumber);
         return result;
     }
 
-    public async Task UpsertEpisode(Episode episode)
+    public async Task UpsertEpisode(Episode episode, CancellationToken cancellationToken = default)
     {
         var collection = _db.GetCollection<Episode>();
 
-        bool episodeExists = await collection.ExistsAsync(x => x.EpisodeId == episode.EpisodeId);
+        var episodeExists = await collection.ExistsAsync(x => x.EpisodeId == episode.EpisodeId);
 
         if (episodeExists)
         {
@@ -49,7 +50,7 @@ public class DataService
 
     }
 
-    public async Task AddMissingEpisodes(IEnumerable<Episode> episodes)
+    public async Task AddMissingEpisodes(IEnumerable<Episode> episodes, CancellationToken cancellationToken = default)
     {
         var collection = _db.GetCollection<Episode>();
 
@@ -63,7 +64,7 @@ public class DataService
         }
     }
 
-    public Task<List<Episode>> GetLatestEpisodes(int count)
+    public Task<List<Episode>> GetLatestEpisodes(int count, CancellationToken  cancellationToken = default)
     {
         var collection = _db.GetCollection<Episode>();
         return collection.Query().OrderByDescending(x => x.EpisodeId).Limit(count).ToListAsync();

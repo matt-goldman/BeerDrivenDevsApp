@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeerDrivenDevsApp.Pages;
+namespace BeerDrivenDevsApp.Controls;
 
-public partial class PlayerPage : ContentPage
+public partial class DiscussionHeaderCard : ContentView
 {
-    public PlayerPage()
+    public DiscussionHeaderCard()
     {
         InitializeComponent();
     }

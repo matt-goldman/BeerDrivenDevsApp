@@ -16,14 +16,14 @@
         <converters:ProgressToWidthConverter x:Key="ProgressToWidth" />
     </ContentView.Resources>
     <Border Style="{StaticResource CardBorder}"
-            Margin="0,10"
+            Margin="0,5"
             Padding="0"
             BackgroundColor="{StaticResource Card}"
             x:DataType="vm:EpisodeViewModel">
-        <Grid RowDefinitions="9*, 7*"
+        <Grid RowDefinitions="9*, 6*"
               VerticalOptions="Fill"
               HorizontalOptions="Fill"
-              MaximumHeightRequest="300"
+              MaximumHeightRequest="400"
               Margin="0"
               Padding="0">
             <Grid>
@@ -43,13 +43,27 @@
                                            VerticalOptions="Fill"
                                            Progress="{Binding DownloadProgress}"
                                            x:Name="DownloadProgressView" />
+                
+                <ImageButton HorizontalOptions="End"
+                             VerticalOptions="End"
+                             WidthRequest="50"
+                             HeightRequest="50"
+                             CornerRadius="25"
+                             Margin="10"
+                             Padding="9,7,7,7"
+                             BorderColor="Silver"
+                             BorderWidth="1"
+                             BackgroundColor="{DynamicResource Amber600}"
+                             Source="{FontImageSource FontFamily=Lucide,
+                                                          Color={DynamicResource Amber950},
+                                                          Glyph={x:Static controls:Icons.Play}}"/>
 
                 <Label HorizontalOptions="Center"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        FontAttributes="Bold"
-                       FontFamily="ArialBold"
+                       FontFamily="OpenSansSemibold"
                        TextColor="{StaticResource Amber600}"
                        FontSize="36"
                        IsVisible="{Binding IsDownloading}"
@@ -65,10 +79,10 @@
                 <FlexLayout Direction="Column"
                             AlignItems="Start"
                             JustifyContent="SpaceEvenly"
-                            Margin="10">
+                            Margin="10,0">
                     <VerticalStackLayout Spacing="2">
                            <Label FontAttributes="Bold"
-                                  FontFamily="ArialBold"
+                                  FontFamily="OpenSansSemibold"
                                   Text="{Binding Title}"
                                   TextColor="{StaticResource Amber900}"
                                   LineBreakMode="TailTruncation"
@@ -117,13 +131,13 @@
                             HorizontalOptions="Start"
                             Grid.Column="1">
                     <ImageButton HorizontalOptions="Center"
-                                 MaximumWidthRequest="20"
+                                 MaximumWidthRequest="{OnPlatform Android=40}"
                                  IsEnabled="{Binding IsDownloaded, Converter={StaticResource InvertedBool}}"
                                  IsVisible="{Binding IsDownloading, Converter={StaticResource InvertedBool}}"
                                  Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=DownloadCommand}"
                                  CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Download},
                                                           Color={Binding IsDownloaded, Converter={StaticResource IsDownloadedConverter}}}"/>
 
@@ -133,14 +147,14 @@
                                  Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=CancelDownloadCommand}"
                                  CommandParameter="{Binding .}"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.CircleX},
                                                           Color={StaticResource Rose400}}"/>
 
                     <ImageButton HorizontalOptions="Center"
                                  MaximumWidthRequest="20"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Share2},
                                                           Color={StaticResource Amber700}}"/>
 
@@ -148,7 +162,7 @@
                                  IsVisible="{Binding IsDownloaded}"
                                  MaximumWidthRequest="20"
                                  Source="{FontImageSource FontFamily=Lucide,
-                                                          Size=12,
+                                                          Size=18,
                                                           Glyph={x:Static controls:Icons.Trash},
                                                           Color={StaticResource Amber700}}"/>
                 </FlexLayout>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fs:FsTabBarBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
+             xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
+             BackgroundColor="Transparent"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BeerDrivenDevsApp.Controls.BddTabBar">
+    <fs:FsTabBarBase.ItemTemplate>
+        <DataTemplate x:DataType="fs:FsTabContext">
+            <Grid>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Unselected">
+                        <VisualState.Setters>
+                            <!-- <Setter TargetName="TabBorder" Property="Border.Background" Value="Transparent"/> -->
+                            <Setter TargetName="TabBorder" Property="Border.StrokeThickness" Value="0"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <!-- <Setter TargetName="TabBorder" Property="Border.Background" Value="{DynamicResource TabBackground}"/> -->
+                            <Setter TargetName="TabBorder" Property="Border.StrokeThickness" Value="1"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    Padding="5"
+                    x:Name="TabBorder"
+                    Stroke="{DynamicResource Amber300}">
+                <HorizontalStackLayout HorizontalOptions="Fill"
+                                       Spacing="5">
+                    <Image VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Source="{Binding Icon}"/>
+                    <Label Text="{Binding Title}"
+                           FontSize="32"
+                           TextColor="{DynamicResource Amber950}"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"/>
+                </HorizontalStackLayout>
+            </Border>
+            </Grid>
+        </DataTemplate>
+    </fs:FsTabBarBase.ItemTemplate>
+    <Grid>
+        <Border BackgroundColor="{DynamicResource Amber100}"
+                Stroke="{DynamicResource Amber300}"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Margin="5"
+                StrokeShape="RoundRectangle 20">
+            <FlexLayout VerticalOptions="End"
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        AlignContent="Center"
+                        AlignItems="Center"
+                        HorizontalOptions="Fill"
+                        HeightRequest="70"
+                        Margin="0,0,65,0">
+                <Border Margin="5,0,0,0"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10"
+                        WidthRequest="55"
+                        HeightRequest="55"
+                        BackgroundColor="{DynamicResource Gray100}">
+                    <Image HeightRequest="30"
+                           WidthRequest="30"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           x:Name="EpisodeThumbnail"
+                           Source="{FontImageSource FontFamily=Lucide,
+                                                    Color={DynamicResource Gray700},
+                                                    Glyph={x:Static controls:Icons.Beer}}"/>
+                </Border>
+                <VerticalStackLayout WidthRequest="150"
+                                     x:Name="EpisodeTitleMarquee">
+                    <ScrollView Orientation="Horizontal">
+                        <Label FontAttributes="Bold"
+                               FontFamily="OpenSansSemibold"
+                               Text="Episode 59: Things and stuff long title as I need to see where it ends"/>
+                    </ScrollView>
+                    <Label FontSize="8"
+                           Text="00:15 / 52:43"/>
+                </VerticalStackLayout>
+                
+                <Grid ColumnSpacing="10"
+                      WidthRequest="120"
+                      HorizontalOptions="End"
+                      VerticalOptions="Center"
+                      ColumnDefinitions="30,40,30">
+                    <ImageButton HorizontalOptions="Center"
+                                 Rotation="120"
+                                 Padding="10"
+                                 WidthRequest="10"
+                                 Margin="0"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color={DynamicResource Amber950},
+                                                          Glyph={x:Static controls:Icons.IterationCcw}}"/>
+                    
+                    <ImageButton HorizontalOptions="Center"
+                                 WidthRequest="50"
+                                 HeightRequest="50"
+                                 Margin="0"
+                                 CornerRadius="25"
+                                 Padding="9,7,7,7"
+                                 BackgroundColor="{DynamicResource Amber600}"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color={DynamicResource Amber950},
+                                                          Glyph={x:Static controls:Icons.Play}}"
+                                 Grid.Column="1"/>
+                    
+                    <ImageButton HorizontalOptions="Center"
+                                 WidthRequest="10"
+                                 Rotation="240"
+                                 Padding="10"
+                                 Margin="0"
+                                 Source="{FontImageSource FontFamily=Lucide,
+                                                          Color={DynamicResource Amber950},
+                                                          Glyph={x:Static controls:Icons.IterationCw}}"
+                                 Grid.Column="2"/>
+                </Grid>
+            </FlexLayout>
+        </Border>
+            
+        <toolkit:Expander VerticalOptions="End"
+                          HorizontalOptions="End"
+                          Direction="Up"
+                          Margin="10,0,15,15"
+                          ExpandedChanged="Expander_OnExpandedChanged"
+                          x:Name="NavExpander">
+            <toolkit:Expander.Header>
+                <Border HeightRequest="50"
+                        WidthRequest="50"
+                        StrokeShape="Ellipse"
+                        Background="{StaticResource BackgroundGradient}"
+                        HorizontalOptions="End">
+                             <Label Text="{x:Static controls:Icons.ChevronsUp}"
+                                    FontFamily="Lucide"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    FontSize="24"
+                                    x:Name="ChevronLabel"/>
+                </Border>
+            </toolkit:Expander.Header>
+            <Border Stroke="{DynamicResource Amber300}"
+                    StrokeShape="RoundRectangle 20"
+                    BackgroundColor="{DynamicResource Amber100}"
+                    Margin="0,0,0,15"
+                    Padding="10">
+                <VerticalStackLayout x:Name="TabBar"
+                                     Spacing="15"
+                                     TranslationY="300"
+                                     BackgroundColor="{DynamicResource Amber100}" />
+            </Border>
+        </toolkit:Expander>
+    </Grid>
+</fs:FsTabBarBase>

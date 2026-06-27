@@ -23,14 +23,11 @@ public partial class DownloadProgress : ContentView
         }
     }
 
-    private SKConfettiSystem _regularBubbleConfettiSystem;
-    private SKConfettiSystem _foamConfettiSystem;
-
     public DownloadProgress()
     {
         InitializeComponent();
 
-        _regularBubbleConfettiSystem = new SKConfettiSystem
+        var regularBubbleConfettiSystem = new SKConfettiSystem
         {
             EmitterBounds   = SKConfettiEmitterBounds.Bottom,
             Emitter         = SKConfettiEmitter.Infinite(100, -1),
@@ -40,7 +37,7 @@ public partial class DownloadProgress : ContentView
             Physics         = [new SKConfettiPhysics(10, 50), new SKConfettiPhysics(5, 10), new SKConfettiPhysics(2, 20)]
         };
 
-        _foamConfettiSystem = new SKConfettiSystem
+        var foamConfettiSystem = new SKConfettiSystem
         {
             EmitterBounds   = SKConfettiEmitterBounds.Top,
             Emitter         = SKConfettiEmitter.Infinite(800, -1),
@@ -57,8 +54,8 @@ public partial class DownloadProgress : ContentView
                 new SKConfettiPhysics(100, 20)]
         };
 
-        Confetti.Systems = [_regularBubbleConfettiSystem];
-        Foam.Systems = [_foamConfettiSystem];
+        Confetti.Systems = [regularBubbleConfettiSystem];
+        Foam.Systems = [foamConfettiSystem];
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -78,14 +75,13 @@ public partial class DownloadProgress : ContentView
 
     private async void BeerProgressOverlayView_AnimationCompleted(object sender, EventArgs e)
     {
-        if (Progress >= 1.0)
-        {
-            Foam.IsVisible = true;
-            Foam.IsAnimationEnabled = true;
-            await Task.Delay(1000); // allow some foam to be visible
-            await BeerOverlay.FadeTo(0, 500, Easing.CubicInOut);
-            Confetti.IsVisible = false;
-            Foam.FadeTo(0, 500, Easing.CubicInOut);
-        }
+        if (!(Progress >= 1.0)) return;
+        
+        Foam.IsVisible = true;
+        Foam.IsAnimationEnabled = true;
+        await Task.Delay(1000); // allow some foam to be visible
+        await BeerOverlay.FadeToAsync(0, 500, Easing.CubicInOut);
+        Confetti.IsVisible = false;
+        _ = Foam.FadeToAsync(0, 500, Easing.CubicInOut);
     }
 }

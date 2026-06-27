@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="BeerDrivenDevsApp/BeerDrivenDevsApp.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>

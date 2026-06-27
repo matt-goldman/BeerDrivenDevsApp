@@ -16,6 +16,7 @@ public class FileDownloadService(HttpClient httpClient)  : IFileDownloadService
         var totalRead = 0L;
         var buffer = new byte[128 * 1024]; // 128 KB buffer
         var isMoreToRead = true;
+        var lastPercent = -1;
 
         using var contentStream = await response.Content.ReadAsStreamAsync(cancellationToken);
         using var fileStream = File.OpenWrite(destinationPath);
@@ -36,8 +37,15 @@ public class FileDownloadService(HttpClient httpClient)  : IFileDownloadService
 
             if (totalBytes != -1)
             {
-                var percent = (double)totalRead / totalBytes;
-                progress.Report(percent);
+                // Decouple report frequency from buffer size: only update the UI when the
+                // whole-percent value actually changes (~100 reports max, regardless of
+                // file size or buffer). totalRead only grows, so percent never steps back.
+                var percent = (int)(100 * totalRead / totalBytes);
+                if (percent != lastPercent)
+                {
+                    lastPercent = percent;
+                    progress.Report(percent / 100.0);
+                }
             }
 
         } while (isMoreToRead);
