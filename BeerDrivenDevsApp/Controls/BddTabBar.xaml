@@ -75,7 +75,7 @@
                                                     Color={DynamicResource Gray700},
                                                     Glyph={x:Static controls:Icons.Beer}}"/>
                 </Border>
-                <VerticalStackLayout WidthRequest="150"
+                <VerticalStackLayout WidthRequest="120"
                                      x:Name="EpisodeTitleMarquee">
                     <ScrollView Orientation="Horizontal">
                         <Label FontAttributes="Bold"
