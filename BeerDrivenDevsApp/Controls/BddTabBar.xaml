@@ -53,6 +53,9 @@
         </DataTemplate>
     </fs:FsTabBarBase.ItemTemplate>
     <Grid x:DataType="vm:TabBarViewModel">
+        <toolkit:MediaElement x:Name="MediaElement"
+                              ShouldShowPlaybackControls="False"
+                              Source="{Binding MediaSource}"/>
         <Border BackgroundColor="{DynamicResource Amber100}"
                 Stroke="{DynamicResource Amber300}"
                 HorizontalOptions="Fill"
