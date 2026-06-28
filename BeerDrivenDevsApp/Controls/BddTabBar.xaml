@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:fs="clr-namespace:FlagstoneUI.Core.Controls;assembly=FlagstoneUI.Core"
              xmlns:controls="clr-namespace:BeerDrivenDevsApp.Controls"
+             xmlns:converters="clr-namespace:BeerDrivenDevsApp.Converters"
+             xmlns:smart="clr-namespace:Plugin.Maui.SmartNavigation;assembly=Plugin.Maui.SmartNavigation"
+             xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
              BackgroundColor="Transparent"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="BeerDrivenDevsApp.Controls.BddTabBar">
+             x:Class="BeerDrivenDevsApp.Controls.BddTabBar"
+             BindingContext="{smart:ResolveViewModel x:TypeArguments=vm:TabBarViewModel}">
+    <fs:FsTabBarBase.Resources>
+        <converters:IsPlayingToGlyphConverter x:Key="PlayingToGlyph" />
+    </fs:FsTabBarBase.Resources>
     <fs:FsTabBarBase.ItemTemplate>
         <DataTemplate x:DataType="fs:FsTabContext">
             <Grid>
@@ -45,7 +52,7 @@
             </Grid>
         </DataTemplate>
     </fs:FsTabBarBase.ItemTemplate>
-    <Grid>
+    <Grid x:DataType="vm:TabBarViewModel">
         <Border BackgroundColor="{DynamicResource Amber100}"
                 Stroke="{DynamicResource Amber300}"
                 HorizontalOptions="Fill"
@@ -80,10 +87,16 @@
                     <ScrollView Orientation="Horizontal">
                         <Label FontAttributes="Bold"
                                FontFamily="OpenSansSemibold"
-                               Text="Episode 59: Things and stuff long title as I need to see where it ends"/>
+                               Text="{Binding PlayingEpisodeTitle}"/>
                     </ScrollView>
-                    <Label FontSize="8"
-                           Text="00:15 / 52:43"/>
+                    <HorizontalStackLayout>
+                        <Label FontSize="8"
+                               Text="00:15"/>
+                        <Label FontSize="8"
+                               Text=" / 3"/>
+                        <Label FontSize="8"
+                               Text="52:43"/>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
                 
                 <Grid ColumnSpacing="10"
@@ -96,6 +109,7 @@
                                  Padding="10"
                                  WidthRequest="10"
                                  Margin="0"
+                                 IsEnabled="{Binding IsPlaying}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
                                                           Glyph={x:Static controls:Icons.IterationCcw}}"/>
@@ -107,9 +121,8 @@
                                  CornerRadius="25"
                                  Padding="9,7,7,7"
                                  BackgroundColor="{DynamicResource Amber600}"
-                                 Source="{FontImageSource FontFamily=Lucide,
-                                                          Color={DynamicResource Amber950},
-                                                          Glyph={x:Static controls:Icons.Play}}"
+                                 IsEnabled="{Binding CanPlay}"
+                                 Source="{Binding IsPlaying, Converter={StaticResource PlayingToGlyph}}"
                                  Grid.Column="1"/>
                     
                     <ImageButton HorizontalOptions="Center"
@@ -117,6 +130,7 @@
                                  Rotation="240"
                                  Padding="10"
                                  Margin="0"
+                                 IsEnabled="{Binding IsPlaying}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
                                                           Glyph={x:Static controls:Icons.IterationCw}}"
