@@ -1,11 +1,10 @@
 using System.Globalization;
+using BeerDrivenDevsApp.Controls;
 
 namespace BeerDrivenDevsApp.Converters;
 
 public class IsPlayingToGlyphConverter : IValueConverter
 {
-    private readonly string _pauseIcon = (string)Application.Current!.Resources["Pause"];
-    private readonly string _playIcon = (string) Application.Current!.Resources["Play"];
     private readonly Color _color = (Color)Application.Current!.Resources["Amber950"];
     
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -14,7 +13,7 @@ public class IsPlayingToGlyphConverter : IValueConverter
         {
             return new FontImageSource
             {
-                Glyph       = isPlaying ? _pauseIcon : _playIcon,
+                Glyph       = isPlaying ? Icons.Pause : Icons.Play,
                 FontFamily  = "Lucide",
                 Color       = _color
             };

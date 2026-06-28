@@ -8,6 +8,8 @@ public interface IEpisodeService
     Task<List<EpisodeViewModel>> GetEpisodes(CancellationToken cancellationToken = default);
 
     Task<List<EpisodeViewModel>> GetLatestEpisodes(CancellationToken cancellationToken = default);
+    
+    Task<EpisodeViewModel?> GetEpisode(int episodeNumber, CancellationToken cancellationToken = default);
 
     Task UpdateEpisode(EpisodeViewModel episode, CancellationToken cancellationToken = default);
 
@@ -88,6 +90,13 @@ public class EpisodeService(
         var latestDbEpisodes = await dataService.GetLatestEpisodes(6, cancellationToken);
 
         return latestDbEpisodes.Select(e => e.ToViewModel()).ToList();
+    }
+
+    public async Task<EpisodeViewModel?> GetEpisode(int episodeNumber, CancellationToken cancellationToken = default)
+    {
+        var episode = await dataService.GetEpisode(episodeNumber, cancellationToken);
+
+        return episode?.ToViewModel();
     }
 
     public Task UpdateEpisode(EpisodeViewModel episode, CancellationToken cancellationToken = default)

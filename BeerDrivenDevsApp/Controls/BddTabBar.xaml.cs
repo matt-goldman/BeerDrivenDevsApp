@@ -1,3 +1,4 @@
+using BeerDrivenDevsApp.ViewModels;
 using CommunityToolkit.Maui.Core;
 using FlagstoneUI.Core.Controls;
 
@@ -9,6 +10,20 @@ public partial class BddTabBar : FsTabBarBase
     {
         InitializeComponent();
         InitializeTabContainer();
+    }
+
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+        if (BindingContext is not (TabBarViewModel tabBarViewModel))
+        {
+            return;
+        }
+        
+        tabBarViewModel.Play += HandlePlay;
+        tabBarViewModel.Pause += HandlePause;
+        tabBarViewModel.Forward += HandleSkipForward;
+        tabBarViewModel.Backward += HandleSkipBackward;
     }
 
     protected override Layout TabContainer => TabBar;
@@ -36,5 +51,25 @@ public partial class BddTabBar : FsTabBarBase
         var tabTask = TabBar.TranslateToAsync(0, 300);
         await Task.WhenAll(rotateTask, tabTask);
         NavExpander.IsExpanded = false;
+    }
+
+    private void HandlePlay(object? sender, EventArgs e)
+    {
+        MediaElement.Play();
+    }
+
+    private void HandlePause(object? sender, EventArgs e)
+    {
+        MediaElement.Pause();
+    }
+
+    private void HandleSkipForward(object? sender, EventArgs e)
+    {
+        
+    }
+
+    private void HandleSkipBackward(object? sender, EventArgs e)
+    {
+        
     }
 }

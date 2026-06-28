@@ -16,7 +16,8 @@ public static class Mappers
             ReleasedOn          = episode.ReleasedOn,
             AudioUrl            = episode.AudioUrl,
             IsDownloaded        = episode.IsDownloaded,
-            ThumbnailUrl        = episode.ThumbnailUrl
+            ThumbnailUrl        = episode.ThumbnailUrl,
+            AudioFilePath       =  episode.AudioFilePath??string.Empty
         };
     }
 
@@ -24,7 +25,7 @@ public static class Mappers
     {
         return new Episode
         {
-            EpisodeId       = viewModel.EpisodeNumber,
+            EpisodeId           = viewModel.EpisodeNumber,
             Title               = viewModel.Title,
             Notes               = viewModel.Description,
             Summary             = viewModel.Summary,

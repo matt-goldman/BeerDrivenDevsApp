@@ -54,8 +54,11 @@
     </fs:FsTabBarBase.ItemTemplate>
     <Grid x:DataType="vm:TabBarViewModel">
         <toolkit:MediaElement x:Name="MediaElement"
+                              HeightRequest="0"
                               ShouldShowPlaybackControls="False"
-                              Source="{Binding MediaSource}"/>
+                              Source="{Binding MediaSource}"
+                              Duration="{Binding Duration}"
+                              Position="{Binding CurrentPosition}"/>
         <Border BackgroundColor="{DynamicResource Amber100}"
                 Stroke="{DynamicResource Amber300}"
                 HorizontalOptions="Fill"
@@ -76,14 +79,21 @@
                         WidthRequest="55"
                         HeightRequest="55"
                         BackgroundColor="{DynamicResource Gray100}">
-                    <Image HeightRequest="30"
-                           WidthRequest="30"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           x:Name="EpisodeThumbnail"
-                           Source="{FontImageSource FontFamily=Lucide,
+                    <Grid>
+                        <Image HeightRequest="30"
+                               WidthRequest="30"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Source="{FontImageSource FontFamily=Lucide,
                                                     Color={DynamicResource Gray700},
                                                     Glyph={x:Static controls:Icons.Beer}}"/>
+                    
+                        <Image HorizontalOptions="Fill"
+                               VerticalOptions="Fill"
+                               Aspect="AspectFill"
+                               IsVisible="{Binding CanPlay}"
+                               Source="{Binding Thumbnail}"/>
+                    </Grid>
                 </Border>
                 <VerticalStackLayout WidthRequest="120"
                                      x:Name="EpisodeTitleMarquee">
@@ -94,11 +104,11 @@
                     </ScrollView>
                     <HorizontalStackLayout>
                         <Label FontSize="8"
-                               Text="00:15"/>
+                               Text="{Binding CurrentPosition}"/>
                         <Label FontSize="8"
                                Text=" / 3"/>
                         <Label FontSize="8"
-                               Text="52:43"/>
+                               Text="{Binding Duration}"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
                 
@@ -113,6 +123,7 @@
                                  WidthRequest="10"
                                  Margin="0"
                                  IsEnabled="{Binding IsPlaying}"
+                                 Command="{Binding SkipBackwardCommand}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
                                                           Glyph={x:Static controls:Icons.IterationCcw}}"/>
@@ -125,6 +136,7 @@
                                  Padding="9,7,7,7"
                                  BackgroundColor="{DynamicResource Amber600}"
                                  IsEnabled="{Binding CanPlay}"
+                                 Command="{Binding PlayPauseCommand}"
                                  Source="{Binding IsPlaying, Converter={StaticResource PlayingToGlyph}}"
                                  Grid.Column="1"/>
                     
@@ -134,6 +146,7 @@
                                  Padding="10"
                                  Margin="0"
                                  IsEnabled="{Binding IsPlaying}"
+                                 Command="{Binding SkipForwardCommand}"
                                  Source="{FontImageSource FontFamily=Lucide,
                                                           Color={DynamicResource Amber950},
                                                           Glyph={x:Static controls:Icons.IterationCw}}"

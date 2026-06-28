@@ -27,6 +27,9 @@ public partial class EpisodeViewModel : ObservableObject
 
     [ObservableProperty]
     public partial string AudioUrl { get; set; }
+    
+    [ObservableProperty]
+    public partial string AudioFilePath { get; set; } = string.Empty;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDownloading))]
