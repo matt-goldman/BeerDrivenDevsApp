@@ -119,7 +119,18 @@ public partial class HomeViewModel(
     [RelayCommand]
     private void PlayEpisode(int episodeNumber)
     {
-        audioState.PlayEpisode(episodeNumber);
+        var affectedEpisode = LatestEpisodes.FirstOrDefault(e => e.EpisodeNumber == episodeNumber);
+
+        if (affectedEpisode is null) return;
+        
+        if (affectedEpisode.IsPlaying)
+        {
+            audioState.Pause();
+        }
+        else
+        {
+            audioState.PlayEpisode(episodeNumber);
+        }
     }
 
     private void UpdateEpisodeState(int episodeNumber, PlayingStatus status)

@@ -35,10 +35,16 @@ public partial class TabBarViewModel: ObservableObject
 
     [ObservableProperty]
     public partial TimeSpan Duration { get; set; }
-    
+
     [ObservableProperty]
     public partial TimeSpan CurrentPosition { get; set; }
-    
+
+    [ObservableProperty]
+    public partial string CurrentPositionDisplay { get; set; } = "00:00";
+
+    [ObservableProperty]
+    public partial string DurationDisplay { get; set; } = "00:00";
+
     [ObservableProperty]
     public partial double Progress { get; set; }
     
@@ -72,7 +78,7 @@ public partial class TabBarViewModel: ObservableObject
             {
                 IsPlaying = false;
                 CanPlay = false;
-                PlayingEpisodeTitle = "Episode not available";
+                PlayingEpisodeTitle = "Pick an episode";
                 Duration = TimeSpan.Zero;
                 CurrentPosition = TimeSpan.Zero;
                 TitleChanged?.Invoke(this, EventArgs.Empty);
@@ -123,6 +129,33 @@ public partial class TabBarViewModel: ObservableObject
 
     [RelayCommand]
     private void SkipBackward() => Backward?.Invoke(this, EventArgs.Empty);
+
+    partial void OnCurrentPositionChanged(TimeSpan value)
+    {
+        // Position is driven by the MediaElement via its read-only, one-way
+        // Position bindable property, so this fires on every playback tick.
+        CurrentPositionDisplay = Format(value);
+        Progress = Duration.TotalSeconds > 0
+            ? value.TotalSeconds / Duration.TotalSeconds
+            : 0;
+
+        // TODO: debounce + persist CurrentPosition to the database here.
+    }
+
+    partial void OnDurationChanged(TimeSpan value)
+    {
+        // Re-format both labels so position picks up the hh:mm:ss vs mm:ss
+        // decision, which is driven by the total duration.
+        DurationDisplay = Format(value);
+        CurrentPositionDisplay = Format(CurrentPosition);
+    }
+
+    // mm:ss when the episode is under an hour, otherwise hh:mm:ss. The chosen
+    // format is based on the total Duration so position and duration stay aligned.
+    private string Format(TimeSpan value) =>
+        Duration.TotalHours >= 1
+            ? value.ToString(@"hh\:mm\:ss")
+            : value.ToString(@"mm\:ss");
 
     private void SetAudioSource()
     {

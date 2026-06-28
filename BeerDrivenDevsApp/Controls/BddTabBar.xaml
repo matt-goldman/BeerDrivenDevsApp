@@ -53,6 +53,7 @@
     <Grid x:DataType="vm:TabBarViewModel">
         <toolkit:MediaElement x:Name="MediaElement"
                               HeightRequest="0"
+                              Volume="1"
                               ShouldShowPlaybackControls="False"
                               Source="{Binding MediaSource}"
                               Duration="{Binding Duration}"
@@ -95,19 +96,28 @@
                 </Border>
                 <VerticalStackLayout WidthRequest="120"
                                      x:Name="EpisodeTitleMarquee">
-                    <ScrollView Orientation="Horizontal" x:Name="ScrollContainer">
-                        <Label FontAttributes="Bold"
+                    <AbsoluteLayout WidthRequest="120"
+                                    HeightRequest="24"
+                                    HorizontalOptions="Start"
+                                    x:Name="MarqueeViewport">
+                        <AbsoluteLayout.Clip>
+                            <RectangleGeometry Rect="0,0,120,24"/>
+                        </AbsoluteLayout.Clip>
+                        <Label AbsoluteLayout.LayoutBounds="0,0,AutoSize,AutoSize"
+                               FontAttributes="Bold"
                                FontFamily="OpenSansSemibold"
+                               LineBreakMode="NoWrap"
+                               TextColor="{DynamicResource Gray800}"
                                Text="{Binding PlayingEpisodeTitle}"
                                x:Name="TitleLabel"/>
-                    </ScrollView>
+                    </AbsoluteLayout>
                     <HorizontalStackLayout>
-                        <Label FontSize="8"
-                               Text="{Binding CurrentPosition}"/>
-                        <Label FontSize="8"
-                               Text=" / 3"/>
-                        <Label FontSize="8"
-                               Text="{Binding Duration}"/>
+                        <Label FontSize="11"
+                               Text="{Binding CurrentPositionDisplay}"/>
+                        <Label FontSize="11"
+                               Text=" / "/>
+                        <Label FontSize="11"
+                               Text="{Binding DurationDisplay}"/>
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
                 

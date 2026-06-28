@@ -85,20 +85,44 @@ public partial class BddTabBar : FsTabBarBase
 
     private CancellationTokenSource? _cts;
 
+    // Forward (reveal) scroll speed in device-independent pixels per second.
+    private const double MarqueeSpeed = 20;
+    // Pause at each end of the scroll, in milliseconds.
+    private const int MarqueePause = 1500;
+
     private async Task ScrollTitle(CancellationToken token)
     {
-        var scrollWidth = ScrollContainer.Width;
-        var titleWidth = TitleLabel.Width;
+        TitleLabel.TranslationX = 0;
 
-        if (titleWidth > scrollWidth)
+        try
         {
+            // Let the new title lay out. The AbsoluteLayout measures the label
+            // with AutoSize bounds, i.e. unconstrained, so TitleLabel.Width is
+            // the full natural text width once arrangement settles.
+            await Task.Delay(50, token);
+
+            var distance = TitleLabel.Width - MarqueeViewport.Width;
+
+            // Nothing to scroll if the title fits within the viewport.
+            if (double.IsNaN(distance) || distance <= 0)
+            {
+                return;
+            }
+
+            var forwardDuration = (uint)(distance / MarqueeSpeed * 1000);
+
             while (!token.IsCancellationRequested)
             {
-                
-                await ScrollContainer.ScrollToAsync(titleWidth + 200, 0, true);
-                await Task.Delay(100, token);
-                await ScrollContainer.ScrollToAsync(0,0,false);
+                await Task.Delay(MarqueePause, token);
+                await TitleLabel.TranslateToAsync(-distance, 0, forwardDuration, Easing.Linear);
+                await Task.Delay(MarqueePause, token);
+                await TitleLabel.TranslateToAsync(0, 0, 500, Easing.Linear);
             }
+        }
+        catch (TaskCanceledException)
+        {
+            // A new title started scrolling; reset position for the next run.
+            TitleLabel.TranslationX = 0;
         }
     }
 }
