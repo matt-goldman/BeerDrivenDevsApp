@@ -57,6 +57,7 @@ public partial class TabBarViewModel: ObservableObject
     public event EventHandler? Pause;
     public event EventHandler? Forward;
     public event EventHandler? Backward;
+    public event EventHandler? TitleChanged;
     
 
     private EpisodeViewModel? _currentEpisode;
@@ -74,6 +75,7 @@ public partial class TabBarViewModel: ObservableObject
                 PlayingEpisodeTitle = "Episode not available";
                 Duration = TimeSpan.Zero;
                 CurrentPosition = TimeSpan.Zero;
+                TitleChanged?.Invoke(this, EventArgs.Empty);
                 return;
             }
             

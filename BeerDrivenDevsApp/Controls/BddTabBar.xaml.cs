@@ -24,6 +24,7 @@ public partial class BddTabBar : FsTabBarBase
         tabBarViewModel.Pause += HandlePause;
         tabBarViewModel.Forward += HandleSkipForward;
         tabBarViewModel.Backward += HandleSkipBackward;
+        tabBarViewModel.TitleChanged += HandleTitleChanged;
     }
 
     protected override Layout TabContainer => TabBar;
@@ -71,5 +72,33 @@ public partial class BddTabBar : FsTabBarBase
     private void HandleSkipBackward(object? sender, EventArgs e)
     {
         
+    }
+
+    private void HandleTitleChanged(object? sender, EventArgs e)
+    {
+        _cts?.Cancel();
+        
+        _cts = new CancellationTokenSource();
+        
+        _ = ScrollTitle(_cts.Token);
+    }
+
+    private CancellationTokenSource? _cts;
+
+    private async Task ScrollTitle(CancellationToken token)
+    {
+        var scrollWidth = ScrollContainer.Width;
+        var titleWidth = TitleLabel.Width;
+
+        if (titleWidth > scrollWidth)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                
+                await ScrollContainer.ScrollToAsync(titleWidth + 200, 0, true);
+                await Task.Delay(100, token);
+                await ScrollContainer.ScrollToAsync(0,0,false);
+            }
+        }
     }
 }
