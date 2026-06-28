@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BeerDrivenDevsApp.ViewModels"
@@ -13,7 +12,7 @@
         <toolkit:BoolToObjectConverter x:Key="IsDownloadedConverter"
                                        TrueObject="{StaticResource Green600}"
                                        FalseObject="{StaticResource Amber700}" />
-        <converters:ProgressToWidthConverter x:Key="ProgressToWidth" />
+        <converters:IsPlayingToGlyphConverter x:Key="PlayingToGlyph" />
     </ContentView.Resources>
     <Border Style="{StaticResource CardBorder}"
             Margin="0,5"
@@ -54,9 +53,9 @@
                              BorderColor="Silver"
                              BorderWidth="1"
                              BackgroundColor="{DynamicResource Amber600}"
-                             Source="{FontImageSource FontFamily=Lucide,
-                                                          Color={DynamicResource Amber950},
-                                                          Glyph={x:Static controls:Icons.Play}}"/>
+                             Command="{Binding Source={x:Reference EpisodeCardRoot}, Path=PlayCommand}"
+                             CommandParameter="{Binding EpisodeNumber}"
+                             Source="{Binding IsPlaying, Converter={StaticResource PlayingToGlyph}}"/>
 
                 <Label HorizontalOptions="Center"
                        VerticalOptions="Center"

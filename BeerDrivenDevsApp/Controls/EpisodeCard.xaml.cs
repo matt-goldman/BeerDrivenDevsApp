@@ -10,6 +10,15 @@ public partial class EpisodeCard : ContentView
         InitializeComponent();
     }
 
+    public static readonly BindableProperty PlayCommandProperty =
+        BindableProperty.Create(nameof(PlayCommand), typeof(ICommand), typeof(EpisodeCard));
+
+    public ICommand PlayCommand
+    {
+        get => (ICommand)GetValue(PlayCommandProperty);
+        set => SetValue(PlayCommandProperty, value);
+    }
+    
     public static readonly BindableProperty DownloadCommandProperty =
     BindableProperty.Create(nameof(DownloadCommand), typeof(ICommand), typeof(EpisodeCard));
 
@@ -26,17 +35,5 @@ public partial class EpisodeCard : ContentView
     {
         get => (ICommand)GetValue(CancelDownloadCommandProperty);
         set => SetValue(CancelDownloadCommandProperty, value);
-    }
-
-    protected override void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-
-        if (width > 0)
-        {
-            // Update the converter's ViewWidth property to reflect the new width
-            var converter = (ProgressToWidthConverter)Resources["ProgressToWidth"];
-            converter.ViewWidth = width;
-        }
     }
 }

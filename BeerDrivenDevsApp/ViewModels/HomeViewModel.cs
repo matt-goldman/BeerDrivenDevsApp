@@ -2,11 +2,14 @@ using BeerDrivenDevsApp.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using BeerDrivenDevsApp.Models;
 using Plugin.Maui.SmartNavigation.Behaviours;
 
 namespace BeerDrivenDevsApp.ViewModels;
 
-public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject, IViewModelLifecycle
+public partial class HomeViewModel(
+    IEpisodeService episodes,
+    IAudioStateService audioState) : ObservableObject, IViewModelLifecycle
 {
     [ObservableProperty]
     public partial bool IsRefreshing { get; set; } = false;
@@ -30,6 +33,8 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject,
         if (isFirstNavigation)
         {
             await GetEpisodes();
+            
+            audioState.CurrentEpisode.Subscribe(state => UpdateEpisodeState(state.EpisodeId, state.Status));
         }
     }
 
@@ -109,5 +114,18 @@ public partial class HomeViewModel(IEpisodeService episodes) : ObservableObject,
         }
         episode.IsDownloaded = false;
         episode.DownloadProgress = 0;
+    }
+
+    [RelayCommand]
+    private void PlayEpisode(int episodeNumber)
+    {
+        audioState.PlayEpisode(episodeNumber);
+    }
+
+    private void UpdateEpisodeState(int episodeNumber, PlayingStatus status)
+    {
+        var affectedEpisode = LatestEpisodes.FirstOrDefault(e => e.EpisodeNumber == episodeNumber);
+
+        affectedEpisode?.IsPlaying = status == PlayingStatus.Playing;
     }
 }

@@ -20,7 +20,8 @@
               <CollectionView.ItemTemplate>
                   <DataTemplate>
                     <controls:EpisodeCard DownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.DownloadEpisodeCommand}"
-                                          CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"/>
+                                          CancelDownloadCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.CancelDownloadCommand}"
+                                          PlayCommand="{Binding Source={x:Reference HomePageRef}, Path=BindingContext.PlayEpisodeCommand}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
            </CollectionView>
